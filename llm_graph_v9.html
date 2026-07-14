@@ -873,8 +873,8 @@ Object.entries(DATA.shareholders_by_company).forEach(([co, shs]) => {
 const investorRank = Object.entries(investorAppearance)
   .map(([name, comps]) => ({ name, count: comps.size, comps: Array.from(comps) }))
   .filter(x => x.count >= 2)
-  .sort((a, b) => b.count - a.count)
-  .slice(0, 6);
+  .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
+  .slice(0, 12);  // v9.2: 改成 12, 展示所有跨公司机构方
 
 statsEl.innerHTML = `
   <div class="stat-pill">公司 <b>${companies.length}</b></div>
@@ -888,6 +888,7 @@ statsEl.innerHTML = `
 
 // 中心节点选择器
 const centerPick = document.getElementById('center-pick');
+// v9.2: 投资机构按跨公司数严格降序, 切最多 8 个
 const verifiedInvestorSuggestions = [...new Set(
   Object.values(DATA.shareholders_by_company)
     .flat()
@@ -896,14 +897,14 @@ const verifiedInvestorSuggestions = [...new Set(
 )].map(name => {
   const count = Object.values(DATA.shareholders_by_company)
     .filter(records => records.some(x => x.type === 'legal' && x.name === name)).length;
-  return { id: 'sh:' + name, name, cat: 'investor', label: `已核实关联 ${count} 家` };
-}).sort((a, b) => b.label.localeCompare(a.label) || a.name.localeCompare(b.name)).slice(0, 8);
+  return { id: 'sh:' + name, name, cat: 'investor', count, label: `已核实关联 ${count} 家` };
+}).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).slice(0, 8);
 const suggestions = [
   // 12 家公司
   ...companies.map(c => ({ id: 'co:' + c.short, name: c.short, cat: 'company', label: c.industry.slice(0, 12) })),
+  // 投资机构 (按跨公司数降序)
   ...verifiedInvestorSuggestions,
-  // 关键人物节点
-  ...(DATA.bosses || []).map(b => ({ id: 'keyperson:' + b.id, name: '👤 ' + b.name, cat: 'person', label: b.title_short + ' (GP 关联)' })),
+  // v9.2: 不再在中心选择器里提供个人 GP 按钮 (个人隶属于机构)
 ];
 suggestions.forEach(s => {
   const btn = document.createElement('button');
