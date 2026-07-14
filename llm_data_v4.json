@@ -382,6 +382,70 @@
         "ratio": 0.09,
         "source": "qichacha",
         "note": "CEO"
+      },
+      {
+        "name": "君联资本",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史 / 投入 6.2 亿持 2710.9 万股",
+        "note": "最大外部投资人 (CSDN)"
+      },
+      {
+        "name": "阿里巴巴",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史 (2023 入股)",
+        "note": "老股东 (科创板日报/界面)"
+      },
+      {
+        "name": "腾讯投资",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东 (科创板日报)"
+      },
+      {
+        "name": "美团",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东 (科创板日报)"
+      },
+      {
+        "name": "京东",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东 (科创板日报)"
+      },
+      {
+        "name": "小米",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东 (科创板日报)"
+      },
+      {
+        "name": "高瓴资本",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东 (科创板日报)"
+      },
+      {
+        "name": "国家人工智能产业投资基金",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "国家队"
       }
     ],
     "月之暗面": [
@@ -475,6 +539,38 @@
         "ratio": 1.44,
         "source": "qichacha",
         "note": ""
+      },
+      {
+        "name": "五源资本",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "天使+",
+        "note": "老股东 (晚点)"
+      },
+      {
+        "name": "阿里巴巴",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "2023-2026 共 7 笔 80+ 亿",
+        "note": "全程参与 (界面/晚点)"
+      },
+      {
+        "name": "腾讯投资",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "2024.02 跟投 30亿$ 估值",
+        "note": "战略 (晚点)"
+      },
+      {
+        "name": "美团龙珠",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "2024 跟投 + 2026.05 20亿$ 领投",
+        "note": "领投 (华峰/晚点)"
       }
     ],
     "百川智能": [
@@ -533,6 +629,14 @@
         "ratio": 0.2,
         "source": "qichacha",
         "note": ""
+      },
+      {
+        "name": "阿里巴巴",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "媒体报道 (科创板日报)"
       }
     ],
     "MiniMax": [
@@ -542,6 +646,22 @@
         "ratio": 100.0,
         "source": "qichacha",
         "note": "VIE 境外母公司"
+      },
+      {
+        "name": "高瓴创投",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东 (科创板日报)"
+      },
+      {
+        "name": "阿里巴巴",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "B 轮 6亿$ + 2026 跟投",
+        "note": "领投+持续加码 (财经十一人)"
       }
     ],
     "零一万物": [
@@ -551,6 +671,14 @@
         "ratio": 100.0,
         "source": "qichacha",
         "note": "WFOE 母公司"
+      },
+      {
+        "name": "阿里巴巴",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "媒体报道 (科创板日报)"
       }
     ],
     "阶跃星辰": [
@@ -705,6 +833,22 @@
         "source": "web",
         "round": "历史融资",
         "note": ""
+      },
+      {
+        "name": "高瓴资本",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "历史",
+        "note": "老股东"
+      },
+      {
+        "name": "京东",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "战略合作",
+        "note": "智能座舱 Agent OS 合作"
       }
     ],
     "生数科技": [
@@ -965,6 +1109,14 @@
         "source": "web",
         "round": "增资前",
         "note": "梁文锋控股平台"
+      },
+      {
+        "name": "国家大基金",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "A 轮 450 亿美元估值 (洽谈中)",
+        "note": "国家集成电路产业投资基金 (路透/金融时报)"
       }
     ],
     "面壁智能": [
@@ -1674,10 +1826,22 @@
     ]
   },
   "multi_company_investors": {
+    "阿里巴巴": [
+      "MiniMax",
+      "智谱",
+      "月之暗面",
+      "百川智能",
+      "零一万物"
+    ],
     "启明创投": [
       "无问芯穹",
       "生数科技",
       "衔远科技",
+      "阶跃星辰"
+    ],
+    "京东": [
+      "智谱",
+      "深度求索",
       "阶跃星辰"
     ],
     "北京市人工智能产业投资基金": [
@@ -1685,44 +1849,129 @@
       "生数科技",
       "面壁智能"
     ],
-    "红杉中国": [
-      "无问芯穹",
+    "腾讯投资": [
+      "智谱",
+      "月之暗面",
       "阶跃星辰"
     ],
     "IDG资本": [
       "深度求索",
       "阶跃星辰"
     ],
-    "顺为资本": [
-      "无问芯穹",
-      "阶跃星辰"
-    ],
-    "联想创投": [
-      "无问芯穹",
-      "阶跃星辰"
-    ],
-    "达泰资本": [
-      "瑞莱智慧",
-      "生数科技"
-    ],
     "中关村科学城": [
       "生数科技",
       "面壁智能"
     ],
-    "蚂蚁集团": [
-      "瑞莱智慧",
-      "生数科技"
+    "五源资本": [
+      "月之暗面",
+      "阶跃星辰"
+    ],
+    "君联资本": [
+      "无问芯穹",
+      "智谱"
+    ],
+    "国家人工智能产业投资基金": [
+      "智谱",
+      "深度求索"
+    ],
+    "小米": [
+      "无问芯穹",
+      "智谱"
     ],
     "洪泰基金": [
       "无问芯穹",
       "面壁智能"
     ],
+    "红杉中国": [
+      "无问芯穹",
+      "阶跃星辰"
+    ],
     "经纬创投": [
       "无问芯穹",
       "衔远科技"
+    ],
+    "联想创投": [
+      "无问芯穹",
+      "阶跃星辰"
+    ],
+    "蚂蚁集团": [
+      "瑞莱智慧",
+      "生数科技"
+    ],
+    "达泰资本": [
+      "瑞莱智慧",
+      "生数科技"
+    ],
+    "顺为资本": [
+      "无问芯穹",
+      "阶跃星辰"
+    ],
+    "高瓴资本": [
+      "智谱",
+      "阶跃星辰"
     ]
   },
   "company_company_edges": [
+    {
+      "from": "MiniMax",
+      "to": "智谱",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "MiniMax",
+      "to": "月之暗面",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "MiniMax",
+      "to": "百川智能",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "MiniMax",
+      "to": "零一万物",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "智谱",
+      "to": "月之暗面",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "智谱",
+      "to": "百川智能",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "智谱",
+      "to": "零一万物",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "月之暗面",
+      "to": "百川智能",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "月之暗面",
+      "to": "零一万物",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
+    {
+      "from": "百川智能",
+      "to": "零一万物",
+      "via": "阿里巴巴",
+      "type": "co_invested"
+    },
     {
       "from": "无问芯穹",
       "to": "生数科技",
@@ -1760,6 +2009,24 @@
       "type": "co_invested"
     },
     {
+      "from": "智谱",
+      "to": "深度求索",
+      "via": "京东",
+      "type": "co_invested"
+    },
+    {
+      "from": "智谱",
+      "to": "阶跃星辰",
+      "via": "京东",
+      "type": "co_invested"
+    },
+    {
+      "from": "深度求索",
+      "to": "阶跃星辰",
+      "via": "京东",
+      "type": "co_invested"
+    },
+    {
       "from": "瑞莱智慧",
       "to": "生数科技",
       "via": "北京市人工智能产业投资基金",
@@ -1778,9 +2045,21 @@
       "type": "co_invested"
     },
     {
-      "from": "无问芯穹",
+      "from": "智谱",
+      "to": "月之暗面",
+      "via": "腾讯投资",
+      "type": "co_invested"
+    },
+    {
+      "from": "智谱",
       "to": "阶跃星辰",
-      "via": "红杉中国",
+      "via": "腾讯投资",
+      "type": "co_invested"
+    },
+    {
+      "from": "月之暗面",
+      "to": "阶跃星辰",
+      "via": "腾讯投资",
       "type": "co_invested"
     },
     {
@@ -1790,9 +2069,51 @@
       "type": "co_invested"
     },
     {
+      "from": "生数科技",
+      "to": "面壁智能",
+      "via": "中关村科学城",
+      "type": "co_invested"
+    },
+    {
+      "from": "月之暗面",
+      "to": "阶跃星辰",
+      "via": "五源资本",
+      "type": "co_invested"
+    },
+    {
+      "from": "无问芯穹",
+      "to": "智谱",
+      "via": "君联资本",
+      "type": "co_invested"
+    },
+    {
+      "from": "智谱",
+      "to": "深度求索",
+      "via": "国家人工智能产业投资基金",
+      "type": "co_invested"
+    },
+    {
+      "from": "无问芯穹",
+      "to": "智谱",
+      "via": "小米",
+      "type": "co_invested"
+    },
+    {
+      "from": "无问芯穹",
+      "to": "面壁智能",
+      "via": "洪泰基金",
+      "type": "co_invested"
+    },
+    {
       "from": "无问芯穹",
       "to": "阶跃星辰",
-      "via": "顺为资本",
+      "via": "红杉中国",
+      "type": "co_invested"
+    },
+    {
+      "from": "无问芯穹",
+      "to": "衔远科技",
+      "via": "经纬创投",
       "type": "co_invested"
     },
     {
@@ -1804,31 +2125,25 @@
     {
       "from": "瑞莱智慧",
       "to": "生数科技",
-      "via": "达泰资本",
-      "type": "co_invested"
-    },
-    {
-      "from": "生数科技",
-      "to": "面壁智能",
-      "via": "中关村科学城",
+      "via": "蚂蚁集团",
       "type": "co_invested"
     },
     {
       "from": "瑞莱智慧",
       "to": "生数科技",
-      "via": "蚂蚁集团",
+      "via": "达泰资本",
       "type": "co_invested"
     },
     {
       "from": "无问芯穹",
-      "to": "面壁智能",
-      "via": "洪泰基金",
+      "to": "阶跃星辰",
+      "via": "顺为资本",
       "type": "co_invested"
     },
     {
-      "from": "无问芯穹",
-      "to": "衔远科技",
-      "via": "经纬创投",
+      "from": "智谱",
+      "to": "阶跃星辰",
+      "via": "高瓴资本",
       "type": "co_invested"
     }
   ],
