@@ -370,8 +370,6 @@ const companies = DATA.companies;
 
 const state = {
   centerId: 'ali_agg', // v8 默认 = 阿里系聚合中心 (看阿里投资策略)
-    ? 'co:' + DATA.default_center
-    : 'co:' + companies[0].short,
   depth: 2,
   visibleNodeTypes: { company: true, investor: true, person: true },
   visibleEdgeTypes: { shareholding_q: true, shareholding_w: true, boss_link: true, co_invested: true, unverified: true, ali_member: true, ali_rumor: true },
@@ -1049,9 +1047,7 @@ const aliPanelHtml = `
 // 插到 stats 后面
 const statsParent = document.getElementById('stats').parentElement;
 if (statsParent && !document.getElementById('ali-panel')) {
-  const div = document.createElement('div');
-  div.innerHTML = aliPanelHtml;
-  statsParent.appendChild(div.firstElementChild);
+  statsParent.insertAdjacentHTML('beforeend', aliPanelHtml);
 }
 
 // 中心节点选择器
