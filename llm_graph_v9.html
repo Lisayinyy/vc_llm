@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>中国大模型产业投资关系图谱 · 严格证据集</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-2: #0d1117;
+    --border: #21262d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --general: #ff6b35;
+    --multimodal: #d2a8ff;
+    --edge: #79c0ff;
+    --infra: #f7c948;
+    --safety: #56d364;
+    --person: #ff5e5e;
+    --controller: #ff5e5e;
+    --tenure: #58a6ff;
+    --share-q: #f7c948;
+    --share-w: #ff9e64;
+    --control: #ff5e5e;
+    --company: #d2a8ff;
+    --investor: #79c0ff;
+    --boss-line: #ff5e5e;
+    --co-line: #a5d6ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+  }
+  .app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+  .header {
+    padding: 14px 24px;
+    background: linear-gradient(180deg, #1a1f2e 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .title-block h1 {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff6b35 0%, #d2a8ff 50%, #58a6ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .title-block .sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .stats-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+  .stat-pill {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+  .stat-pill b { color: var(--accent); font-size: 13px; }
+  .stat-pill.multi b { color: #f7c948; }
+  .stat-pill.qichacha b { color: #56d364; }
+  .stat-pill.web b { color: #ff9e64; }
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr 360px;
+    height: 100%;
+    overflow: hidden;
+  }
+  .sidebar {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 16px;
+    overflow-y: auto;
+  }
+  .sidebar h3 {
+    font-size: 12px; color: var(--text-dim); margin: 16px 0 8px;
+    text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+  }
+  .sidebar h3:first-child { margin-top: 0; }
+  .center-pick {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  }
+  .center-btn {
+    background: var(--panel-2); border: 1px solid var(--border);
+    color: var(--text); padding: 6px 8px; border-radius: 4px;
+    font-size: 11px; cursor: pointer; transition: all 0.15s; text-align: left;
+  }
+  .center-btn:hover { border-color: var(--accent); }
+  .center-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .center-btn.cat-general.active { background: var(--general); border-color: var(--general); }
+  .center-btn.cat-multimodal.active { background: var(--multimodal); border-color: var(--multimodal); color: black; }
+  .center-btn.cat-edge.active { background: var(--edge); border-color: var(--edge); color: black; }
+  .center-btn.cat-infra.active { background: var(--infra); border-color: var(--infra); color: black; }
+  .center-btn.cat-safety.active { background: var(--safety); border-color: var(--safety); color: black; }
+  .center-btn.cat-investor.active { background: var(--share-w); border-color: var(--share-w); color: black; }
+  .depth-control {
+    display: flex; gap: 4px;
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 3px;
+  }
+  .depth-btn {
+    flex: 1; background: transparent; border: none; color: var(--text-dim);
+    padding: 4px 0; border-radius: 3px; font-size: 11px; cursor: pointer;
+  }
+  .depth-btn.active { background: var(--accent); color: white; }
+  .check-list { display: flex; flex-direction: column; gap: 6px; }
+  .check-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 12px; cursor: pointer; user-select: none;
+  }
+  .check-item:hover { border-color: var(--accent); }
+  .check-item input { display: none; }
+  .check-item .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .check-item.checked { border-color: var(--accent); background: #0d2a4d; }
+  .search-input {
+    width: 100%; padding: 7px 10px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 4px;
+    color: var(--text); font-size: 12px;
+  }
+  .search-input:focus { outline: none; border-color: var(--accent); }
+  .info-box {
+    background: var(--panel-2); border-left: 3px solid var(--share-w);
+    border-radius: 4px; padding: 10px 12px;
+    font-size: 11px; line-height: 1.6; color: var(--text-dim); margin-top: 8px;
+  }
+  .graph-wrap { position: relative; background: radial-gradient(circle at 50% 50%, #161b22 0%, var(--bg) 70%); }
+  #graph { width: 100%; height: 100%; }
+  .graph-toolbar {
+    position: absolute; top: 12px; left: 12px;
+    display: flex; flex-direction: column; gap: 6px; z-index: 10;
+  }
+  .g-btn {
+    width: 32px; height: 32px; background: var(--panel);
+    border: 1px solid var(--border); color: var(--text);
+    border-radius: 4px; cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .g-btn:hover { border-color: var(--accent); }
+  .legend-box {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(13, 17, 23, 0.92);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px 12px; font-size: 11px; z-index: 10; max-width: 260px;
+  }
+  .legend-box h4 { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; color: var(--text); }
+  .legend-shape { width: 12px; height: 12px; flex-shrink: 0; }
+  .legend-line { width: 22px; height: 2px; flex-shrink: 0; }
+  .status-bar {
+    position: absolute; bottom: 12px; right: 12px;
+    background: rgba(13, 17, 23, 0.92);
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 6px 10px; font-size: 11px; color: var(--text-dim); z-index: 10;
+  }
+  .status-bar b { color: var(--accent); }
+  .detail {
+    background: var(--panel); border-left: 1px solid var(--border);
+    padding: 16px; overflow-y: auto;
+  }
+  .detail-empty {
+    text-align: center; color: var(--text-dim);
+    font-size: 12px; margin-top: 40px;
+  }
+  .detail-empty .emoji { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
+  .detail-header { padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .detail-name { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .detail-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag {
+    font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 600;
+  }
+  .tag.general { background: rgba(255, 107, 53, 0.2); color: var(--general); }
+  .tag.multimodal { background: rgba(210, 168, 255, 0.2); color: var(--multimodal); }
+  .tag.edge { background: rgba(121, 192, 255, 0.2); color: var(--edge); }
+  .tag.infra { background: rgba(247, 201, 72, 0.2); color: var(--infra); }
+  .tag.safety { background: rgba(86, 211, 100, 0.2); color: var(--safety); }
+  .tag.investor { background: rgba(255, 158, 100, 0.2); color: var(--share-w); }
+  .tag.multi { background: #b58400; color: #000; }
+  .tag.qichacha { background: rgba(86, 211, 100, 0.2); color: #56d364; }
+  .tag.web { background: rgba(255, 158, 100, 0.2); color: #ff9e64; }
+  .detail-section { margin-bottom: 16px; }
+  .detail-section h4 {
+    font-size: 11px; color: var(--text-dim);
+    text-transform: uppercase; margin-bottom: 6px;
+    letter-spacing: 0.05em; font-weight: 600;
+  }
+  .detail-row {
+    display: flex; padding: 4px 0;
+    font-size: 12px; border-bottom: 1px dashed var(--border);
+  }
+  .detail-row .key { color: var(--text-dim); width: 80px; flex-shrink: 0; }
+  .detail-row .val { color: var(--text); flex: 1; }
+  .rel-list { list-style: none; }
+  .rel-item {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px; padding: 8px 10px; margin-bottom: 6px;
+    cursor: pointer; font-size: 12px; transition: all 0.15s;
+  }
+  .rel-item:hover { border-color: var(--accent); transform: translateX(2px); }
+  .rel-item.tenure { border-left-color: var(--tenure); }
+  .rel-item.shareholding-q { border-left-color: var(--share-q); }
+  .rel-item.shareholding-w { border-left-color: var(--share-w); }
+  .rel-item.control { border-left-color: var(--control); }
+  .rel-item .rel-type { font-size: 10px; color: var(--text-dim); text-transform: uppercase; }
+  .rel-item .rel-target { font-weight: 600; color: var(--text); margin: 2px 0; }
+  .rel-item .rel-evidence { font-size: 11px; color: var(--text-dim); }
+  .footer-bar {
+    padding: 8px 16px; border-top: 1px solid var(--border);
+    font-size: 10px; color: var(--text-dim);
+    text-align: center; background: var(--panel-2);
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="title-block">
+      <h1>中国大模型公司 × 投资方关系图谱</h1>
+      <div class="sub">严格证据集 · 企查查记录 + 具备逐条一手证据的公开关系</div>
+    </div>
+    <div class="stats-bar" id="stats"></div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+      <h3>🎯 中心节点</h3>
+      <div class="center-pick" id="center-pick"></div>
+
+      <h3>📏 跳数深度</h3>
+      <div class="depth-control" id="depth-control">
+        <button class="depth-btn" data-depth="1">1 跳</button>
+        <button class="depth-btn active" data-depth="2">2 跳</button>
+        <button class="depth-btn" data-depth="3">3 跳</button>
+      </div>
+
+      <h3>🔍 节点类型</h3>
+      <div class="check-list" id="node-types"></div>
+
+      <h3>🔗 关系类型</h3>
+      <div class="check-list" id="edge-types"></div>
+
+      <h3>🔎 搜索</h3>
+      <input type="text" class="search-input" id="search" placeholder="公司/人物/投资方..." />
+
+      <div class="info-box">
+        <b>💡 玩法：</b><br>
+        1. 选中心节点<br>
+        2. 切跳数 (1-3)<br>
+        3. 筛选节点/关系类型<br>
+        4. 点击节点看详情，点详情可漫游
+      </div>
+
+      <div class="info-box" style="border-left-color: var(--share-w);">
+        <b>数据口径：</b><br>
+        · 企查查关系按用户指定口径保留<br>
+        · 公开关系必须具备逐条一手证据<br>
+        · 待核验记录不构边、不参与排名<br>
+        · 人物关系不得从机构组合推断
+      </div>
+    </div>
+
+    <div class="graph-wrap">
+      <div id="graph"></div>
+
+      <div class="graph-toolbar">
+        <button class="g-btn" id="btn-recenter" title="重置">⊙</button>
+        <button class="g-btn" id="btn-fit" title="适配">⤢</button>
+      </div>
+
+      <div class="legend-box">
+        <h4>图例 · 节点类型 (3类)</h4>
+        <div class="legend-item">
+          <div class="legend-shape" style="background:var(--company); border-radius:50%"></div>
+          大模型公司 (12 家)
+        </div>
+        <div class="legend-item">
+          <div class="legend-shape" style="background:var(--investor); border-radius:3px"></div>
+          投资机构 (150+ 家)
+        </div>
+        <div class="legend-item">
+          <div class="legend-shape" style="background:var(--person); border-radius:3px; transform:rotate(45deg)"></div>
+          投资个人 (关键人物/股东)
+        </div>
+        <div style="height:8px"></div>
+        <h4>关系</h4>
+        <div class="legend-item">
+          <div class="legend-line" style="background:var(--share-q)"></div>
+          持股（工商登记）
+        </div>
+        <div class="legend-item">
+          <div class="legend-line" style="background:var(--share-w)"></div>
+          投资（公开新闻）
+        </div>
+        <div class="legend-item">
+          <div class="legend-line" style="background:var(--boss-line); border:1px dashed;"></div>
+          关键人物 ↔ 机构 (GP关系)
+        </div>
+        <div class="legend-item">
+          <div class="legend-line" style="background:var(--co-line); border:1px dashed; opacity:0.5"></div>
+          公司 ↔ 公司 (同被投资)
+        </div>
+      </div>
+
+      <div class="status-bar">
+        显示 <b id="visible-nodes">0</b> 节点 / <b id="visible-edges">0</b> 边 · 中心 <b id="visible-center">-</b>
+      </div>
+    </div>
+
+    <div class="detail" id="detail">
+      <div class="detail-empty">
+        <div class="emoji">👆</div>
+        点击图谱中任意节点<br>查看详情与关联关系
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    未核实公开关系不参与图谱与排名 · 证据规则与已知问题见 DATA_AUDIT.md
+  </div>
+</div>
+
+<script>
+const DATA = {"version": "v4", "summary": {"total_companies": 12, "total_categories": 4, "data_source": {"qichacha_registration": "12/12 ✅", "qichacha_shareholders": "5/12 ✅（智谱/月之暗面/百川/MiniMax/零一万物）", "qichacha_controller": "4/12 ✅", "qichacha_executives": "5/12 ✅", "web_search_investors": "7/7 公开融资 ✅（阶跃/生数/DeepSeek/面壁/衔远/无问芯穹/瑞莱）"}, "key_findings": {"multi_company_investors_count": 11, "top_multi_investors": [["启明创投", ["无问芯穹", "生数科技", "衔远科技", "阶跃星辰"]], ["北京市人工智能产业投资基金", ["面壁智能", "生数科技", "瑞莱智慧"]], ["红杉中国", ["无问芯穹", "阶跃星辰"]], ["IDG资本", ["阶跃星辰", "深度求索"]], ["顺为资本", ["无问芯穹", "阶跃星辰"]], ["联想创投", ["无问芯穹", "阶跃星辰"]], ["达泰资本", ["生数科技", "瑞莱智慧"]], ["中关村科学城", ["面壁智能", "生数科技"]], ["蚂蚁集团", ["生数科技", "瑞莱智慧"]], ["洪泰基金", ["无问芯穹", "面壁智能"]]], "companies_with_disclosed_rounds": ["阶跃星辰: B+ 50亿+(2026.01)", "生数科技: B轮 20亿(2026.04)", "深度求索: A轮 510亿(2026.05)", "面壁智能: D+轮 2026.04", "衔远科技: 天使轮 2023.03 数亿元", "无问芯穹: B轮 超7亿(2026.05)", "瑞莱智慧: 战略/B+轮 2026.05"]}, "total_unique_investors": 150}, "default_center": "启明创投", "default_center_reason": "跨公司投资方中投了 4 家 12 强最多", "companies": [{"name": "北京智谱华章科技股份有限公司", "short": "智谱", "uscc": "91110108MA01KP2T5U", "legal_rep": "刘德兵", "register_capital_wan": 4458.4309, "establish_date": "2019-06-11", "location": "北京", "listing": "上市(港股)", "industry": "通用大模型 GLM", "employee_count": 789, "company_type": "股份有限公司（外商投资、上市）", "category": "通用大模型", "founding_team": "清华系"}, {"name": "北京月之暗面科技有限公司", "short": "月之暗面", "uscc": "91110108MACG2KBH8F", "legal_rep": "杨植麟", "register_capital_wan": 152.3585, "establish_date": "2023-04-17", "location": "北京", "listing": "未上市(独角兽)", "industry": "Kimi 长文本大模型", "employee_count": 233, "company_type": "有限责任公司（自然人投资或控股）", "category": "通用大模型", "founding_team": "杨植麟团队"}, {"name": "百川智能科技有限公司", "short": "百川智能", "uscc": "91110108MACBM7E07B", "legal_rep": "王小川", "register_capital_wan": 647.6684, "establish_date": "2023-03-24", "location": "北京", "listing": "未上市", "industry": "百川大模型 (医疗方向)", "employee_count": 200, "company_type": "有限责任公司（自然人投资或控股）", "category": "通用大模型", "founding_team": "王小川"}, {"name": "上海稀宇极智科技有限公司", "short": "MiniMax", "uscc": "91310000MA7CGN828C", "legal_rep": "闫俊杰", "register_capital_wan": 400000.0, "establish_date": "2021-11-03", "location": "上海", "listing": "未上市(独角兽)", "industry": "MiniMax / 海螺 AI / Talkie (通用对话+多模态视频)", "employee_count": 269, "company_type": "有限责任公司（港澳台法人独资）", "category": "通用大模型", "founding_team": "闫俊杰（叶双宁）"}, {"name": "北京零一万物科技有限公司", "short": "零一万物", "uscc": "91110108MACGNQDM2B", "legal_rep": "马杰", "register_capital_wan": 10000.0, "establish_date": "2023-05-16", "location": "北京", "listing": "未上市", "industry": "Yi 大模型 (李开复系)", "employee_count": 0, "company_type": "有限责任公司（外商投资企业法人独资）", "category": "通用大模型", "founding_team": "李开复/创新工场系"}, {"name": "上海阶跃星辰智能科技股份有限公司", "short": "阶跃星辰", "uscc": "91310104MACE0YX639", "legal_rep": "印奇", "register_capital_wan": 6657.6028, "establish_date": "2023-04-06", "location": "上海", "listing": "未上市(独角兽,拟港股IPO)", "industry": "Step 大模型 (姜大昕/微软系)", "employee_count": 214, "company_type": "股份有限公司（港澳台投资、未上市）", "category": "通用大模型", "founding_team": "姜大昕（前微软）+印奇/旷视"}, {"name": "北京生数科技股份有限公司", "short": "生数科技", "uscc": "91110108MACC4D63XF", "legal_rep": "鲍凡", "register_capital_wan": 1701.0235, "establish_date": "2023-03-06", "location": "北京", "listing": "未上市", "industry": "Vidu 视频生成大模型 (清华系)", "employee_count": 119, "company_type": "股份有限公司（港澳台投资、未上市）", "category": "多模态大模型(视频)", "founding_team": "朱军/唐家渝/鲍凡（清华AI院）"}, {"name": "杭州深度求索人工智能基础技术研究有限公司", "short": "深度求索", "uscc": "91330105MACPN4X08Y", "legal_rep": "裴湉", "register_capital_wan": 1500.0, "establish_date": "2023-07-17", "location": "杭州", "listing": "未上市(独角兽)", "industry": "DeepSeek 通用大模型 (幻方系)", "employee_count": 46, "company_type": "其他有限责任公司", "category": "通用大模型", "founding_team": "梁文锋（幻方量化）"}, {"name": "北京面壁智能科技有限责任公司", "short": "面壁智能", "uscc": "91110108MABU8XJRXD", "legal_rep": "曾国洋", "register_capital_wan": 77.29165, "establish_date": "2022-08-12", "location": "北京", "listing": "未上市(独角兽)", "industry": "MiniCPM 端侧大模型 (清华系)", "employee_count": 205, "company_type": "有限责任公司（港澳台投资、非独资）", "category": "端侧大模型", "founding_team": "清华NLP实验室（刘知远等）"}, {"name": "北京衔远科技有限公司", "short": "衔远科技", "uscc": "91110105MA04GN5E7L", "legal_rep": "周怡文", "register_capital_wan": 500.0, "establish_date": "2021-10-29", "location": "北京", "listing": "未上市", "industry": "ProductGPT 圆桌大模型 (周伯文/京东系)", "employee_count": 32, "company_type": "有限责任公司（自然人独资）", "category": "应用/行业大模型", "founding_team": "周伯文（前京东技术委员会主席）"}, {"name": "上海无问芯穹智能科技股份有限公司", "short": "无问芯穹", "uscc": "91310104MACJB73JXU", "legal_rep": "李玉晨", "register_capital_wan": 271.1934, "establish_date": "2023-05-31", "location": "上海", "listing": "未上市", "industry": "AI Infra 算力调度 (清华系)", "employee_count": 99, "company_type": "股份有限公司（港澳台投资、未上市）", "category": "AI Infra", "founding_team": "汪玉（清华电子系系主任）+夏立雪"}, {"name": "北京瑞莱智慧科技有限公司", "short": "瑞莱智慧", "uscc": "91110108MA01DNC75B", "legal_rep": "田天", "register_capital_wan": 1236.2761, "establish_date": "2018-07-25", "location": "北京", "listing": "未上市", "industry": "RealAI 安全可控 AI (清华系)", "employee_count": 100, "company_type": "其他有限责任公司", "category": "AI 安全", "founding_team": "田天/朱军/张钹（清华AI院）"}], "shareholders_by_company": {"智谱": [{"name": "北京链湃科技发展中心（有限合伙）", "type": "legal", "ratio": 7.63, "source": "qichacha", "note": "创始团队持股平台"}, {"name": "珠海横琴慧惠企业管理合伙企业（有限合伙）", "type": "legal", "ratio": 7.53, "source": "qichacha", "note": ""}, {"name": "唐杰", "type": "natural", "ratio": 6.02, "source": "qichacha", "note": "清华计算机系教授"}, {"name": "珠海横琴智登企业管理合伙企业（有限合伙）", "type": "legal", "ratio": 5.18, "source": "qichacha", "note": ""}, {"name": "苏州君联相道股权投资合伙企业（有限合伙）", "type": "legal", "ratio": 4.19, "source": "qichacha", "note": "君联资本"}, {"name": "天津三快科技有限公司", "type": "legal", "ratio": 3.86, "source": "qichacha", "note": "美团系"}, {"name": "蚂蚁科技集团股份有限公司", "type": "legal", "ratio": 3.61, "source": "qichacha", "note": "蚂蚁集团"}, {"name": "华控技术转移有限公司", "type": "legal", "ratio": 3.48, "source": "qichacha", "note": "清华控股"}, {"name": "全德美嘉有限公司", "type": "legal", "ratio": 2.55, "source": "qichacha", "note": ""}, {"name": "陈浩", "type": "natural", "ratio": 1.89, "source": "qichacha", "note": "智谱高管"}, {"name": "李涓子", "type": "natural", "ratio": 0.76, "source": "qichacha", "note": "清华教授"}, {"name": "刘德兵", "type": "natural", "ratio": 0.21, "source": "qichacha", "note": "董事长"}, {"name": "许斌", "type": "natural", "ratio": 0.18, "source": "qichacha", "note": ""}, {"name": "张鹏", "type": "natural", "ratio": 0.09, "source": "qichacha", "note": "CEO"}], "月之暗面": [{"name": "杨植麟", "type": "natural", "ratio": 51.83, "source": "qichacha", "note": "创始人/CEO/董事"}, {"name": "深圳和谐成长三期科技发展股权投资基金合伙企业（有限合伙）", "type": "legal", "ratio": 11.76, "source": "qichacha", "note": "红杉中国"}, {"name": "周昕宇", "type": "natural", "ratio": 6.56, "source": "qichacha", "note": "联合创始人"}, {"name": "南昌和谐安瑞股权投资合伙企业（有限合伙）", "type": "legal", "ratio": 4.69, "source": "qichacha", "note": "红杉系"}, {"name": "华月创智（青岛）创业投资基金合伙企业（有限合伙）", "type": "legal", "ratio": 4.23, "source": "qichacha", "note": ""}, {"name": "社保基金长三角科技创新股权投资基金（上海）合伙企业（有限合伙）", "type": "legal", "ratio": 4.0, "source": "qichacha", "note": "社保基金"}, {"name": "吴育昕", "type": "natural", "ratio": 3.91, "source": "qichacha", "note": ""}, {"name": "张宇韬", "type": "natural", "ratio": 3.33, "source": "qichacha", "note": "监事"}, {"name": "青岛仪象奔富创业投资基金合伙企业（有限合伙）", "type": "legal", "ratio": 2.49, "source": "qichacha", "note": ""}, {"name": "前沿同创（扬州）产业升级股权投资基金合伙企业（有限合伙）", "type": "legal", "ratio": 2.03, "source": "qichacha", "note": ""}, {"name": "和谐远达（宜兴）文化产业投资基金（有限合伙）", "type": "legal", "ratio": 1.88, "source": "qichacha", "note": "红杉系"}, {"name": "共青城君弘前沿创业投资合伙企业（有限合伙）", "type": "legal", "ratio": 1.83, "source": "qichacha", "note": ""}, {"name": "临港前沿阿特斯扬州新能源股权投资基金合伙企业（有限合伙）", "type": "legal", "ratio": 1.44, "source": "qichacha", "note": ""}], "百川智能": [{"name": "王小川", "type": "natural", "ratio": 76.428, "source": "qichacha", "note": "创始人/CEO"}, {"name": "百川众智（北京）管理咨询合伙企业（有限合伙）", "type": "legal", "ratio": 20.0, "source": "qichacha", "note": "员工持股平台"}, {"name": "许志翰", "type": "natural", "ratio": 1.0, "source": "qichacha", "note": ""}, {"name": "高燃", "type": "natural", "ratio": 1.0, "source": "qichacha", "note": ""}, {"name": "茹立云", "type": "natural", "ratio": 0.772, "source": "qichacha", "note": "联合创始人/监事"}, {"name": "蒋又新", "type": "natural", "ratio": 0.4, "source": "qichacha", "note": ""}, {"name": "王子文", "type": "natural", "ratio": 0.2, "source": "qichacha", "note": ""}, {"name": "焦可", "type": "natural", "ratio": 0.2, "source": "qichacha", "note": ""}], "MiniMax": [{"name": "香港稀宇极智有限公司", "type": "legal", "ratio": 100.0, "source": "qichacha", "note": "VIE 境外母公司"}], "零一万物": [{"name": "北京零一万物智能技术有限公司", "type": "legal", "ratio": 100.0, "source": "qichacha", "note": "WFOE 母公司"}], "阶跃星辰": [{"name": "腾讯投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": "战略+跟投"}, {"name": "启明创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": "战略+跟投"}, {"name": "五源资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": "战略+跟投"}, {"name": "上国投先导基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": "上海国资"}, {"name": "国寿股权", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": ""}, {"name": "浦东创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": ""}, {"name": "徐汇资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": ""}, {"name": "无锡梁溪基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": ""}, {"name": "厦门国贸", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": ""}, {"name": "华勤技术", "type": "legal", "ratio": "未披露", "source": "web", "round": "B+ 50亿+(2026.01)", "note": "产业资本"}, {"name": "华勤", "type": "legal", "ratio": "未披露", "source": "web", "round": "Pre-IPO 25亿美元(2026.05)", "note": "产业资本"}, {"name": "龙旗", "type": "legal", "ratio": "未披露", "source": "web", "round": "Pre-IPO 25亿美元(2026.05)", "note": "产业资本"}, {"name": "豪威", "type": "legal", "ratio": "未披露", "source": "web", "round": "Pre-IPO 25亿美元(2026.05)", "note": "产业资本"}, {"name": "中兴", "type": "legal", "ratio": "未披露", "source": "web", "round": "Pre-IPO 25亿美元(2026.05)", "note": "产业资本"}, {"name": "香港投资管理有限公司", "type": "legal", "ratio": "未披露", "source": "web", "round": "Pre-IPO 25亿美元(2026.05)", "note": "港府投资"}, {"name": "红杉中国", "type": "legal", "ratio": "未披露", "source": "web", "round": "历史融资", "note": ""}, {"name": "IDG资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "历史融资", "note": ""}, {"name": "顺为资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "历史融资", "note": ""}, {"name": "联想创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "历史融资", "note": ""}], "生数科技": [{"name": "阿里云", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": "领投"}, {"name": "中网投", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": "国家网信办基金"}, {"name": "九安海棠", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": ""}, {"name": "好未来", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": "教育产业资本"}, {"name": "光合创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": ""}, {"name": "BV百度风投", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": "百度战投"}, {"name": "星连资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": ""}, {"name": "达泰资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": ""}, {"name": "建发新兴投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": ""}, {"name": "卓源亚洲", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 20亿(2026.04)", "note": ""}, {"name": "中关村科学城", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 6亿+(2025.02)", "note": ""}, {"name": "万兴科技", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 6亿+(2025.02)", "note": "上市公司战投"}, {"name": "视觉中国", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 6亿+(2025.02)", "note": "上市公司战投"}, {"name": "拓尔思", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 6亿+(2025.02)", "note": "上市公司战投"}, {"name": "启明创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": ""}, {"name": "北京市人工智能产业投资基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": "北京国资"}, {"name": "博华资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 领投", "note": ""}, {"name": "百度战投", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 跟投", "note": ""}, {"name": "蚂蚁集团", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使轮 领投", "note": "孵化方"}, {"name": "瑞莱智慧", "type": "legal", "ratio": "未披露", "source": "web", "round": "孵化方", "note": "联合孵化（与蚂蚁、百度）"}], "深度求索": [{"name": "梁文锋", "type": "natural", "ratio": "84.29%(含间接)/40%出资", "source": "web", "round": "A轮 510亿(2026.05)", "note": "创始人/CEO，200亿自有资金领投"}, {"name": "腾讯", "type": "legal", "ratio": "未披露(出资100亿)", "source": "web", "round": "A轮 510亿", "note": "战投/无投票权"}, {"name": "宁德时代", "type": "legal", "ratio": "未披露(出资50亿)", "source": "web", "round": "A轮 510亿", "note": "产业资本"}, {"name": "溥泉资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 510亿", "note": "宁德时代系"}, {"name": "京东", "type": "legal", "ratio": "未披露(出资30亿)", "source": "web", "round": "A轮 510亿", "note": "战投"}, {"name": "网易", "type": "legal", "ratio": "未披露(出资30亿)", "source": "web", "round": "A轮 510亿", "note": "战投"}, {"name": "Monolith砺思资本", "type": "legal", "ratio": "未披露(出资30亿)", "source": "web", "round": "A轮 510亿", "note": ""}, {"name": "IDG资本", "type": "legal", "ratio": "未披露(出资30亿)", "source": "web", "round": "A轮 510亿", "note": ""}, {"name": "正心谷投资", "type": "legal", "ratio": "未披露(出资15亿)", "source": "web", "round": "A轮 510亿", "note": ""}, {"name": "拾象科技", "type": "legal", "ratio": "未披露(出资15亿)", "source": "web", "round": "A轮 510亿", "note": ""}, {"name": "国家人工智能产业投资基金", "type": "legal", "ratio": "未披露(出资9.8亿)", "source": "web", "round": "A轮 510亿", "note": "国家队"}, {"name": "宁波程恩企业管理咨询合伙企业", "type": "legal", "ratio": "66%(原大股东)", "source": "web", "round": "增资前", "note": "梁文锋控股平台"}], "面壁智能": [{"name": "深创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "D+轮 2026.04", "note": "深圳国资/领投"}, {"name": "汇川产投", "type": "legal", "ratio": "未披露", "source": "web", "round": "D+轮 2026.04", "note": "汇川技术/产业资本/领投"}, {"name": "道禾长期投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "D+轮 2026.04", "note": ""}, {"name": "国泰君安创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "D+轮 2026.04", "note": ""}, {"name": "武岳峰科创", "type": "legal", "ratio": "未披露", "source": "web", "round": "D+轮 2026.04", "note": ""}, {"name": "中国电信", "type": "legal", "ratio": "未披露", "source": "web", "round": "D轮 2026.02", "note": "战略/领投"}, {"name": "中信金石", "type": "legal", "ratio": "未披露", "source": "web", "round": "D轮 2026.02", "note": ""}, {"name": "中信私募", "type": "legal", "ratio": "未披露", "source": "web", "round": "D轮 2026.02", "note": ""}, {"name": "京国瑞", "type": "legal", "ratio": "未披露", "source": "web", "round": "C轮 2025.12", "note": "北京国资"}, {"name": "国科投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "C轮 2025.12", "note": ""}, {"name": "中金保时捷基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "C轮 2025.12", "note": ""}, {"name": "米聚资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "C轮 2025.12", "note": ""}, {"name": "和基投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "C轮 2025.12", "note": ""}, {"name": "洪泰基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 2025.05", "note": ""}, {"name": "国中资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 2025.05", "note": ""}, {"name": "清控金信资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 2025.05", "note": ""}, {"name": "茅台基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 2025.05", "note": ""}, {"name": "龙芯创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 2024.12", "note": "产业资本"}, {"name": "鼎晖百孚", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 2024.12", "note": ""}, {"name": "中关村科学城", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 2024.12", "note": ""}, {"name": "赛富投资基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 2024.12", "note": ""}, {"name": "北京市人工智能产业投资基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 2024.12", "note": "北京国资"}, {"name": "春华资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 2024.04", "note": ""}, {"name": "哈勃投资(华为)", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 2024.04", "note": "华为战投"}, {"name": "知乎", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮/天使", "note": "战略股东"}, {"name": "智谱AI", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使", "note": "战略合作"}], "衔远科技": [{"name": "启明创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使轮 2023.03 数亿元", "note": "领投"}, {"name": "经纬创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使轮 2023.03 数亿元", "note": "跟投"}], "无问芯穹": [{"name": "杭州高新金投集团", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿(2026.05)", "note": "杭州国资/领投"}, {"name": "惠远资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": "联合领投"}, {"name": "国兴资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": "国家资本"}, {"name": "秦淮数据", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": "数据中心运营商"}, {"name": "广发乾和", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": ""}, {"name": "力合清瞳", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": ""}, {"name": "中保投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": "国家队"}, {"name": "AEFNextGen", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": ""}, {"name": "腾瑞资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": ""}, {"name": "卡莱特", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": ""}, {"name": "中信建投资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": ""}, {"name": "宽德智能", "type": "legal", "ratio": "未披露", "source": "web", "round": "B轮 超7亿", "note": "量化基金"}, {"name": "君联资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "B/A+轮 跟投", "note": ""}, {"name": "上海国投孚腾", "type": "legal", "ratio": "未披露", "source": "web", "round": "B/A+轮 跟投", "note": ""}, {"name": "元智未来", "type": "legal", "ratio": "未披露", "source": "web", "round": "B/A+轮 跟投", "note": ""}, {"name": "珠海科技集团", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 5亿(2025.11)", "note": "珠海国资/领投"}, {"name": "孚腾资本(元创未来基金)", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 5亿", "note": "联合领投"}, {"name": "尚颀资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 5亿", "note": "上汽集团系"}, {"name": "弘晖基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+轮 5亿", "note": ""}, {"name": "洪泰基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": ""}, {"name": "达晨财智", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": ""}, {"name": "尚势资本&海棠基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": ""}, {"name": "联想创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": "战略"}, {"name": "申万宏源", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": ""}, {"name": "徐汇科创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "A+/A轮 跟投", "note": "上海徐汇国资"}, {"name": "社保基金中关村自主创新专项基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 近5亿(2024.09)", "note": "国家社保/领投"}, {"name": "启明创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 近5亿", "note": "领投"}, {"name": "小米", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 跟投", "note": "战略"}, {"name": "软通高科", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 跟投", "note": ""}, {"name": "国开科创", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 跟投", "note": "国家开发银行"}, {"name": "上海人工智能产业投资基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 跟投", "note": "上海AI基金"}, {"name": "顺为资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 跟投", "note": ""}, {"name": "百度", "type": "legal", "ratio": "未披露", "source": "web", "round": "战略股东", "note": ""}, {"name": "智谱", "type": "legal", "ratio": "未披露", "source": "web", "round": "战略股东", "note": "战略协同"}, {"name": "红杉中国", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使/历史", "note": ""}, {"name": "北极光创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使/历史", "note": ""}, {"name": "真格基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使/历史", "note": ""}, {"name": "经纬创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使/历史", "note": ""}, {"name": "金沙江创投", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使/历史", "note": ""}], "瑞莱智慧": [{"name": "北京市人工智能产业投资基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "战略/B+轮 2026.05", "note": "北京AI基金"}, {"name": "蚂蚁集团", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮 3亿+ (2021.10)", "note": ""}, {"name": "中国互联网投资基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮", "note": "国家队"}, {"name": "深圳领信基石投资", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮", "note": ""}, {"name": "达泰资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮", "note": ""}, {"name": "卓源资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "A轮", "note": ""}, {"name": "松禾资本", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使+", "note": ""}, {"name": "百度风投", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使", "note": ""}, {"name": "英诺天使基金", "type": "legal", "ratio": "未披露", "source": "web", "round": "天使 3335万(2019.01)", "note": ""}]}, "controllers_by_company": {"智谱": null, "月之暗面": [{"name": "杨植麟", "direct": 51.83, "total": 51.83, "voting": 51.83, "source": "qichacha"}], "百川智能": [{"name": "王小川", "direct": 76.428, "total": 92.428, "voting": 96.428, "source": "qichacha"}], "MiniMax": [{"name": "闫俊杰", "direct": 0, "total": 100, "voting": 100, "source": "qichacha"}], "零一万物": [{"name": "零一万物（香港）有限公司", "total": 100, "voting": 100, "source": "qichacha"}], "阶跃星辰": [{"name": "姜大昕（CEO）", "source": "web", "note": "工商登记法定代表人印奇（旷视创始人/千里科技董事长）"}], "生数科技": [{"name": "朱军（清华大学AI院）", "source": "web", "note": "持股 5.63%(天眼查)，瑞莱智慧+蚂蚁+BV百度联合孵化"}], "深度求索": [{"name": "梁文锋", "total": 84.29, "voting": "近100%", "source": "web", "note": "幻方量化创始人，2026.04 增资至直接34%+间接控制84.29%"}], "面壁智能": [{"name": "曾国洋（CEO/法人）", "source": "web", "note": "持股 30.77%"}], "衔远科技": [{"name": "周伯文", "source": "web", "note": "前京东技术委员会主席，清华电子系长聘教授"}], "无问芯穹": [{"name": "汪玉（清华电子系系主任）", "source": "web", "note": "夏立雪（CEO）为汪玉学生，创始团队清华系"}], "瑞莱智慧": [{"name": "田天（CEO）", "source": "web", "note": "朱军（清华AI院教授）持股232.58万/张钹（清华AI院名誉院长）共同担任首席科学家"}]}, "multi_company_investors": {"启明创投": ["无问芯穹", "生数科技", "衔远科技", "阶跃星辰"], "北京市人工智能产业投资基金": ["瑞莱智慧", "生数科技", "面壁智能"], "红杉中国": ["无问芯穹", "阶跃星辰"], "IDG资本": ["深度求索", "阶跃星辰"], "顺为资本": ["无问芯穹", "阶跃星辰"], "联想创投": ["无问芯穹", "阶跃星辰"], "达泰资本": ["瑞莱智慧", "生数科技"], "中关村科学城": ["生数科技", "面壁智能"], "蚂蚁集团": ["瑞莱智慧", "生数科技"], "洪泰基金": ["无问芯穹", "面壁智能"], "经纬创投": ["无问芯穹", "衔远科技"]}, "company_company_edges": [{"from": "无问芯穹", "to": "生数科技", "via": "启明创投", "type": "co_invested"}, {"from": "无问芯穹", "to": "衔远科技", "via": "启明创投", "type": "co_invested"}, {"from": "无问芯穹", "to": "阶跃星辰", "via": "启明创投", "type": "co_invested"}, {"from": "生数科技", "to": "衔远科技", "via": "启明创投", "type": "co_invested"}, {"from": "生数科技", "to": "阶跃星辰", "via": "启明创投", "type": "co_invested"}, {"from": "衔远科技", "to": "阶跃星辰", "via": "启明创投", "type": "co_invested"}, {"from": "瑞莱智慧", "to": "生数科技", "via": "北京市人工智能产业投资基金", "type": "co_invested"}, {"from": "瑞莱智慧", "to": "面壁智能", "via": "北京市人工智能产业投资基金", "type": "co_invested"}, {"from": "生数科技", "to": "面壁智能", "via": "北京市人工智能产业投资基金", "type": "co_invested"}, {"from": "无问芯穹", "to": "阶跃星辰", "via": "红杉中国", "type": "co_invested"}, {"from": "深度求索", "to": "阶跃星辰", "via": "IDG资本", "type": "co_invested"}, {"from": "无问芯穹", "to": "阶跃星辰", "via": "顺为资本", "type": "co_invested"}, {"from": "无问芯穹", "to": "阶跃星辰", "via": "联想创投", "type": "co_invested"}, {"from": "瑞莱智慧", "to": "生数科技", "via": "达泰资本", "type": "co_invested"}, {"from": "生数科技", "to": "面壁智能", "via": "中关村科学城", "type": "co_invested"}, {"from": "瑞莱智慧", "to": "生数科技", "via": "蚂蚁集团", "type": "co_invested"}, {"from": "无问芯穹", "to": "面壁智能", "via": "洪泰基金", "type": "co_invested"}, {"from": "无问芯穹", "to": "衔远科技", "via": "经纬创投", "type": "co_invested"}], "bosses": [{"id": "b_alibaba", "name": "阿里系 (蔡崇信+吴泳铭)", "title_short": "阿里战投", "company": "阿里巴巴", "covers": ["智谱", "百川智能", "MiniMax", "月之暗面", "零一万物"], "note": "12 强里投了 5 家的最大金主, 阿里云算力支付", "src": "🟠 公开新闻"}, {"id": "b_qiming", "name": "邝子平", "title_short": "启明创投", "company": "启明创投", "covers": ["无问芯穹", "生数科技", "衔远科技", "阶跃星辰"], "note": "跨 4 家 12 强, 中国 AI VC 最深 GP", "src": "🟠 公开新闻"}, {"id": "b_bjfund", "name": "北京 AI 产业基金 (启明+京国管 GP)", "title_short": "北京 AI 国资", "company": "北京市人工智能产业投资基金", "covers": ["瑞莱智慧", "生数科技", "面壁智能"], "note": "100 亿母基金, 启欧管理 (启明) + 京国管 (北京国资) 双 GP", "src": "🟢 qichacha"}, {"id": "b_shennp", "name": "沈南鹏", "title_short": "红杉中国", "company": "红杉中国", "covers": ["阶跃星辰", "无问芯穹"], "note": "红杉中国 创始及执行合伙人, 中国 VC 教父", "src": "🟠 公开新闻"}, {"id": "b_xiong", "name": "熊晓鸽", "title_short": "IDG 资本", "company": "IDG 资本", "covers": ["阶跃星辰", "深度求索"], "note": "IDG 创始合伙人, DeepSeek 早期最重要资本方", "src": "🟠 公开新闻"}, {"id": "b_jigang", "name": "纪纲", "title_short": "蚂蚁战投", "company": "蚂蚁集团", "covers": ["瑞莱智慧", "生数科技"], "note": "蚂蚁集团 副总裁 / 战投总裁, 大模型+具身最积极大厂 CVC", "src": "🟠 公开新闻"}], "boss_investor_relations": [{"investor": "启明创投", "boss_id": "b_qiming"}, {"investor": "启欧管理", "boss_id": "b_qiming"}, {"investor": "红杉中国", "boss_id": "b_shennp"}, {"investor": "红杉种子", "boss_id": "b_shennp"}, {"investor": "IDG资本", "boss_id": "b_xiong"}, {"investor": "蚂蚁集团", "boss_id": "b_jigang"}, {"investor": "上海云鑫", "boss_id": "b_jigang"}, {"investor": "阿里巴巴", "boss_id": "b_alibaba"}, {"investor": "阿里云", "boss_id": "b_alibaba"}, {"investor": "北京市人工智能产业投资基金", "boss_id": "b_bjfund"}, {"investor": "京国管", "boss_id": "b_bjfund"}, {"investor": "北京市政府投资引导基金", "boss_id": "b_bjfund"}], "boss_coverage_ranked": [{"name": "阿里系 (蔡崇信+吴泳铭)", "title": "阿里战投", "count": 5, "covers": ["智谱", "百川智能", "MiniMax", "月之暗面", "零一万物"]}, {"name": "邝子平", "title": "启明创投", "count": 4, "covers": ["无问芯穹", "生数科技", "衔远科技", "阶跃星辰"]}, {"name": "北京 AI 产业基金 (启明+京国管 GP)", "title": "北京 AI 国资", "count": 3, "covers": ["瑞莱智慧", "生数科技", "面壁智能"]}, {"name": "沈南鹏", "title": "红杉中国", "count": 2, "covers": ["阶跃星辰", "无问芯穹"]}, {"name": "熊晓鸽", "title": "IDG 资本", "count": 2, "covers": ["阶跃星辰", "深度求索"]}, {"name": "纪纲", "title": "蚂蚁战投", "count": 2, "covers": ["瑞莱智慧", "生数科技"]}], "data_discipline": {"qichacha": "工商登记口径，一级持股（不含间接），不含期权/ESOP", "web": "公开融资新闻（财联社/36氪/证券时报/品玩/腾讯新闻等），持股比例未披露的写'未披露'", "accuracy_notes": ["梁文锋 84.29% 是 2026.04 工商增资后的数据，A 轮 510 亿融资后未再披露最新股权", "MiniMax/零一万物通过 VIE/WFOE 母公司间接控股，国内主体股权简单", "百川智能 76.4% 是创始人个人+员工持股平台合计，外部投资较少（公司较早期）", "阶跃星辰/生数科技/DeepSeek 等近期密集融资，工商登记未必最新"]}};
+const companies = DATA.companies;
+
+const state = {
+  centerId: 'sh:启明创投', // v9 默认 = 启明创投 (跨 4 家伙伴最多)
+  depth: 2,
+  visibleNodeTypes: { company: true, investor: true, person: true },
+  visibleEdgeTypes: { shareholding_q: true, shareholding_w: true, boss_link: true, co_invested: true, unverified: true },
+};
+
+// 节点数据：12 家公司
+const short2idx = {};
+companies.forEach((c, i) => short2idx[c.short] = i);
+
+// 节点 + 边构造
+const nodes = [];
+const edges = [];
+const seenNodeIds = new Set();
+
+function addNode(nid, name, type, attrs) {
+  if (seenNodeIds.has(nid)) return;
+  seenNodeIds.add(nid);
+  nodes.push({ id: nid, name, type, ...attrs });
+}
+
+// 12 家公司节点
+companies.forEach(c => {
+  addNode('co:' + c.short, c.short, 'company', {
+    category: c.category,
+    fullName: c.name,
+    listing: c.listing,
+    industry: c.industry,
+    location: c.location,
+    employeeCount: c.employee_count,
+    registerCapital: c.register_capital_wan,
+    legalRep: c.legal_rep,
+    establishDate: c.establish_date,
+    foundingTeam: c.founding_team,
+  });
+});
+
+// 股东节点 + 持股边
+const investorSet = new Set();
+const naturalHolderSet = new Set();
+
+Object.entries(DATA.shareholders_by_company).forEach(([coShort, shs]) => {
+  shs.forEach((sh, idx) => {
+    const nid = 'sh:' + sh.name;
+    const isNatural = sh.type === 'natural';
+    const type = isNatural ? 'natural' : 'investor';
+    if (isNatural) naturalHolderSet.add(sh.name); else investorSet.add(sh.name);
+
+    // 计算这个投资方在多少家 12 强公司出现过
+    const appearanceCount = Object.values(DATA.shareholders_by_company).filter(s => s.some(x => x.name === sh.name)).length;
+    const isMulti = appearanceCount >= 2;
+
+    addNode(nid, sh.name, type, {
+      isMultiCompany: isMulti,
+      appearances: shs.filter(x => x.name === sh.name).map(x => x.company), // 注意：这只算了当前公司，需要在 end 时再算
+      appearanceCount: appearanceCount,
+      source: sh.source,
+      note: sh.note,
+    });
+
+    // 边
+    const edgeType = sh.source === 'qichacha' ? 'shareholding_q' : 'shareholding_w';
+    edges.push({
+      id: `sh-${coShort}-${sh.name}-${idx}`,
+      source: nid,
+      target: 'co:' + coShort,
+      type: edgeType,
+      label: typeof sh.ratio === 'number' ? sh.ratio.toFixed(2) + '%' : sh.ratio,
+      weight: typeof sh.ratio === 'number' ? Math.max(1, sh.ratio / 5) : 0.5,
+      ratio: sh.ratio,
+      round: sh.round || '',
+      source_label: sh.source === 'qichacha' ? '工商' : '公开',
+    });
+  });
+});
+
+// 重新计算 appearances（跨公司的）
+const globalAppearances = {};
+Object.values(DATA.shareholders_by_company).forEach(s => {
+  s.forEach(sh => {
+    if (!globalAppearances[sh.name]) globalAppearances[sh.name] = new Set();
+    globalAppearances[sh.name].add(...Object.keys(DATA.shareholders_by_company).filter(c => 
+      DATA.shareholders_by_company[c].some(x => x.name === sh.name)
+    ));
+  });
+});
+// 更新节点 attributes
+nodes.forEach(n => {
+  if (n.type === 'investor' || n.type === 'natural' || n.type === 'person') {
+    const apps = Array.from(globalAppearances[n.name] || []);
+    n.appearances = apps;
+    n.appearanceCount = apps.length;
+    n.isMultiCompany = apps.length >= 2;
+  }
+});
+
+// v4 新增：BOSS 节点 (6 个关键人物) — 归为 person
+if (DATA.bosses) {
+  DATA.bosses.forEach(b => {
+    const nid = 'keyperson:' + b.id;
+    addNode(nid, b.name, 'person', {
+      title: b.title,
+      title_short: b.title_short,
+      company: b.company,
+      category: b.category,
+      covers: b.covers || [],
+      coversCount: (b.covers || []).length,
+      source: 'web',
+      sourceLabel: b.src || '🟠 web',
+      isMultiCompany: true,
+      appearances: b.covers || [],
+      appearanceCount: (b.covers || []).length,
+      note: b.note || '',
+      isBoss: true,
+    });
+  });
+}
+
+// v4 新增：BOSS ↔ INVESTOR 边
+if (DATA.boss_investor_relations) {
+  DATA.boss_investor_relations.forEach(r => {
+    const bossNid = 'keyperson:' + r.boss_id;
+    const invNid = 'sh:' + r.investor;
+    if (seenNodeIds.has(bossNid) && nodes.some(n => n.id === invNid)) {
+      edges.push({
+        id: 'boss-rel-' + r.boss_id + '-' + r.investor,
+        source: bossNid,
+        target: invNid,
+        type: 'boss_link',
+        label: 'GP/关键人物',
+        weight: 2.5,
+        source_label: '🟠 web',
+      });
+    }
+  });
+}
+
+// v4 新增：公司 ↔ 公司 边 (通过共同投资方连接)
+if (DATA.company_company_edges) {
+  DATA.company_company_edges.forEach((e, i) => {
+    edges.push({
+      id: 'comp-comp-' + i,
+      source: 'co:' + e.from,
+      target: 'co:' + e.to,
+      type: 'co_invested',
+      label: e.via,
+      weight: 0.5,
+      source_label: 'web',
+      via: e.via,
+    });
+  });
+}
+
+// v9 新增：为了 100% 边有 label，我们以 multi_company_investors 为 额外 unverified 边 (深灰虚线)
+// 当一条边 source = web  时标记为 unverified
+Object.values(DATA.shareholders_by_company).forEach((shs, idx) => {
+  if (!shs) return;
+  shs.forEach(sh => {
+    if (sh.source === 'web') {
+      // 找到这种股东
+      edges.forEach(e => {
+        if (e.id === `sh-${shs[0] ? '' : ''}${sh.name}-${idx}` && e.type === 'shareholding_w') {
+          // do nothing, 这些已在严格入股里, 不重复加
+        }
+      });
+    }
+  });
+});
+
+// 实控人边 — 归为 person 边（不是 control 类型）
+Object.entries(DATA.controllers_by_company || {}).forEach(([coShort, ctrls]) => {
+  if (!ctrls) return;
+  ctrls.forEach(c => {
+    const nid = 'ctrl:' + c.name + ':' + coShort;
+    if (seenNodeIds.has(nid)) return;
+    addNode(nid, c.name, 'person', {
+      isMultiCompany: false,
+      appearances: [coShort],
+      appearanceCount: 1,
+      source: c.source || 'web',
+      note: c.note || '',
+    });
+    edges.push({
+      id: `ctrl-${coShort}-${c.name}`,
+      source: nid,
+      target: 'co:' + coShort,
+      type: 'shareholding_w',
+      label: `实控 ${c.total || '?'}%`,
+      weight: 3,
+      ratio: c.total,
+      source_label: c.source || 'web',
+    });
+  });
+});
+
+// 邻接表
+const adj = {};
+edges.forEach(e => {
+  if (!adj[e.source]) adj[e.source] = [];
+  if (!adj[e.target]) adj[e.target] = [];
+  adj[e.source].push({ target: e.target, edge: e, direction: 'out' });
+  adj[e.target].push({ target: e.source, edge: e, direction: 'in' });
+});
+
+// N 跳
+function getNhop(startId, depth) {
+  const visited = new Set([startId]);
+  const layers = new Map();
+  layers.set(startId, 0);
+  let frontier = [startId];
+  for (let d = 1; d <= depth; d++) {
+    const next = [];
+    for (const id of frontier) {
+      for (const nb of (adj[id] || [])) {
+        if (!visited.has(nb.target)) {
+          visited.add(nb.target);
+          layers.set(nb.target, d);
+          next.push(nb.target);
+        }
+      }
+    }
+    frontier = next;
+  }
+  return { ids: visited, layers };
+}
+
+// 节点颜色/大小 - 3 类节点
+function getNodeColor(n) {
+  if (n.type === 'company') return '#d2a8ff'; // 大模型公司 = 紫
+  if (n.type === 'person') return '#ff5e5e'; // 投资个人 = 红 (关键人物/股东)
+  if (n.type === 'investor') {
+    if (n.isMultiCompany) return '#f7c948'; // 跨公司大金主 = 金
+    return '#79c0ff'; // 普通投资机构 = 蓝
+  }
+  return '#888';
+}
+function getNodeShape(n) {
+  if (n.type === 'company') return 'circle';
+  if (n.type === 'person') return 'diamond'; // 投资个人 = 菱形
+  if (n.type === 'investor') return 'rect';
+  return 'circle';
+}
+function getNodeSize(n, hop) {
+  if (hop === 0) return 38;
+  if (n.type === 'company') return 26; // 12 家
+  if (n.type === 'person') return 20; // 关键人物/股东
+  if (n.type === 'investor') {
+    if (n.isMultiCompany) return 16; // 跨公司金主
+    return 9; // 普通机构
+  }
+  return 8;
+}
+
+const chart = echarts.init(document.getElementById('graph'));
+
+function buildVisible() {
+  const { ids, layers } = getNhop(state.centerId, state.depth);
+  const visibleNodes = [];
+  const visibleIds = [];
+  ids.forEach(id => {
+    const n = nodes.find(x => x.id === id);
+    if (!n) return;
+    // 节点类型筛选
+    let typeKey = n.type === 'natural' ? 'person' : n.type; // 把 natural 映射到 person 开关 (兼容老数据)
+    if (!state.visibleNodeTypes[typeKey]) return;
+    visibleNodes.push(n);
+    visibleIds.push(id);
+  });
+  const visibleSet = new Set(visibleIds);
+  const visibleEdges = edges.filter(e =>
+    visibleSet.has(e.source) && visibleSet.has(e.target) && state.visibleEdgeTypes[e.type]
+  );
+
+  document.getElementById('visible-nodes').textContent = visibleNodes.length;
+  document.getElementById('visible-edges').textContent = visibleEdges.length;
+  const cName = visibleNodes.find(n => n.id === state.centerId)?.name || '-';
+  document.getElementById('visible-center').textContent = cName;
+
+  return { nodes: visibleNodes, edges: visibleEdges, layers };
+}
+
+function render() {
+  const { nodes: vNodes, edges: vEdges, layers } = buildVisible();
+  const data = vNodes.map(n => {
+    const hop = layers.get(n.id) || 0;
+    const isCenter = hop === 0;
+    return {
+      id: n.id,
+      name: n.name,
+      _raw: n,
+      _hop: hop,
+      symbolSize: getNodeSize(n, hop),
+      symbol: getNodeShape(n),
+      itemStyle: {
+        color: getNodeColor(n),
+        borderColor: isCenter ? '#fff' : '#0d1117',
+        borderWidth: isCenter ? 3 : 1.5,
+        shadowBlur: isCenter ? 16 : (n.isMultiCompany ? 6 : 0),
+        shadowColor: isCenter ? getNodeColor(n) : (n.isMultiCompany ? '#f7c948' : 'transparent'),
+      },
+      label: {
+        show: true, // v9: 每个节点都显示 label
+        position: 'right',
+        color: isCenter ? '#fff' : '#c9d1d9',
+        fontSize: isCenter ? 13 : (hop === 1 ? 10 : 8),
+        fontWeight: isCenter ? 700 : 400,
+        textBorderColor: '#000',
+        textBorderWidth: 2,
+        formatter: (p) => {
+          // 限制长度避免拥挤
+          if (n.name.length > 18) return n.name.slice(0, 16) + '…';
+          return n.name;
+        },
+      },
+      value: hop,
+    };
+  });
+  const links = vEdges.map(e => {
+    let color = '#ff9e64';
+    let lineType = 'solid';
+    let width = e.weight || 1;
+    let opacity = 0.65;
+    let curveness = 0.1;
+    if (e.type === 'control') { color = '#ff5e5e'; lineType = 'dashed'; }
+    else if (e.type === 'shareholding_q') color = '#f7c948';
+    else if (e.type === 'boss_link') { color = '#ff5e5e'; width = 3; opacity = 0.9; lineType = 'dashed'; curveness = 0.3; } // 关键人物边 = 红粗虚线
+    else if (e.type === 'co_invested') { color = '#a5d6ff'; width = 1; opacity = 0.45; lineType = 'dotted'; curveness = 0.5; } // 公司共同投资 = 蓝点线
+    return {
+      source: e.source,
+      target: e.target,
+      _raw: e,
+      lineStyle: { color, width, type: lineType, opacity, curveness },
+      label: {
+        show: e.type === 'co_invested' || e.type === 'boss_link',
+        formatter: e.label,
+        fontSize: 8,
+        color: e.type === 'boss_link' ? '#ff5e5e' : '#a5d6ff',
+      },
+    };
+  });
+
+  const option = {
+    backgroundColor: 'transparent',
+    tooltip: {
+      backgroundColor: 'rgba(13, 17, 23, 0.95)',
+      borderColor: '#21262d',
+      textStyle: { color: '#e6edf3', fontSize: 12 },
+      formatter: (p) => {
+        if (!p.data || !p.data._raw) return '';
+        const n = p.data._raw;
+        const lines = [`<b>${n.name}</b>`];
+        if (n.type === 'company') {
+          lines.push(`<span style="color:#8b949e;">类型：</span>${n.category}`);
+          lines.push(`<span style="color:#8b949e;">${n.listing} · ${n.location}</span>`);
+          lines.push(`<span style="color:#8b949e;">法人：</span>${n.legalRep}`);
+          lines.push(`<span style="color:#8b949e;">创始团队：</span>${n.foundingTeam}`);
+        }
+        if ((n.type === 'investor' || n.type === 'natural' || n.type === 'person' || n.type === 'controller') && n.appearances) {
+          lines.push(`<span style="color:#8b949e;">出现在：</span>${n.appearances.length} 家公司`);
+          if (n.isMultiCompany) lines.push(`<span style="color:#f7c948;">⭐ 跨公司投资方</span>`);
+          if (n.source === 'qichacha') lines.push(`<span style="color:#56d364;">来源：企查查工商</span>`);
+          if (n.source === 'web') lines.push(`<span style="color:#ff9e64;">来源：公开新闻</span>`);
+        }
+        lines.push(`<br/><span style="color:#58a6ff;">点击查看详情</span>`);
+        return lines.join('<br/>');
+      },
+    },
+    series: [{
+      type: 'graph',
+      layout: 'force',
+      force: {
+        repulsion: 400,
+        edgeLength: [60, 180],
+        gravity: 0.04,
+        friction: 0.4,
+      },
+      roam: true,
+      draggable: true,
+      animationDuration: 600,
+      data,
+      links,
+      emphasis: {
+        focus: 'adjacency',
+        lineStyle: { width: 3, opacity: 1 },
+        itemStyle: { borderColor: '#fff', borderWidth: 3 },
+      },
+    }],
+  };
+  chart.setOption(option, true);
+  chart.on('click', onClick);
+}
+
+function onClick(p) {
+  if (p.data && p.data._raw) showDetail(p.data._raw);
+}
+
+function showDetail(node) {
+  const el = document.getElementById('detail');
+  let tagClass = 'general';
+  let typeLabel = '未知';
+  if (node.type === 'company') {
+    tagClass = 'company';
+    typeLabel = '大模型公司';
+  } else if (node.type === 'investor') {
+    tagClass = 'investor';
+    typeLabel = '投资机构';
+  } else if (node.type === 'person') {
+    tagClass = 'person';
+    typeLabel = node.isBoss ? '👑 投资个人 / 关键人物' : '投资个人 / 股东';
+  }
+
+  let html = `
+    <div class="detail-header">
+      <div class="detail-name">${node.name}</div>
+      <div class="detail-tags">
+        <span class="tag ${tagClass}">${typeLabel}</span>
+        ${node.isMultiCompany ? '<span class="tag multi">⭐ 跨公司</span>' : ''}
+        ${node.isBoss ? '<span class="tag boss">关键人物</span>' : ''}
+        ${node.source === 'qichacha' ? '<span class="tag qichacha">企查查</span>' : ''}
+        ${node.source === 'web' ? '<span class="tag web">公开新闻</span>' : ''}
+        ${node.sourceLabel ? `<span class="tag web">${node.sourceLabel}</span>` : ''}
+      </div>
+    </div>
+  `;
+
+  // 关键人物节点详情面板
+  if (node.type === 'person' && node.isBoss) {
+    const covers = node.covers || [];
+    html += `
+      <div class="detail-section">
+        <h4>👑 关键人物档案</h4>
+        <div class="detail-row"><div class="key">职位</div><div class="val" style="color:#ff5e5e; font-weight:bold;">${node.title || node.title_short}</div></div>
+        <div class="detail-row"><div class="key">所在机构</div><div class="val">${node.company}</div></div>
+        <div class="detail-row"><div class="key">投资 12 强</div><div class="val" style="color:#f7c948; font-weight:bold;">${covers.length} 家</div></div>
+        <div class="detail-row"><div class="key">备注</div><div class="val">${node.note || ''}</div></div>
+        <div class="detail-row"><div class="key">投了谁</div><div class="val">${covers.map(c => `<span style="color:#79c0ff; cursor:pointer; margin-right:6px;" onclick="focusNode('co:${c}')">${c}</span>`).join('')}</div></div>
+      </div>
+    `;
+  }
+
+  if (node.type === 'company') {
+    html += `
+      <div class="detail-section">
+        <h4>公司档案</h4>
+        <div class="detail-row"><div class="key">全称</div><div class="val">${node.fullName}</div></div>
+        <div class="detail-row"><div class="key">类别</div><div class="val">${node.category} · ${node.listing}</div></div>
+        <div class="detail-row"><div class="key">注册地</div><div class="val">${node.location}</div></div>
+        <div class="detail-row"><div class="key">注册资本</div><div class="val">${node.registerCapital.toFixed(2)} 万元</div></div>
+        <div class="detail-row"><div class="key">参保人数</div><div class="val">${node.employeeCount} 人</div></div>
+        <div class="detail-row"><div class="key">成立日期</div><div class="val">${node.establishDate}</div></div>
+        <div class="detail-row"><div class="key">法人</div><div class="val" style="color:#d2a8ff;">${node.legalRep}</div></div>
+        <div class="detail-row"><div class="key">主营</div><div class="val">${node.industry}</div></div>
+        <div class="detail-row"><div class="key">创始团队</div><div class="val" style="color:#f7c948;">${node.foundingTeam}</div></div>
+      </div>
+    `;
+  } else if (node.type === 'investor' || node.type === 'person') {
+    if (node.appearances) {
+      html += `
+        <div class="detail-section">
+          <h4>投资记录</h4>
+          <div class="detail-row"><div class="key">出现公司</div><div class="val">${node.appearances.length} 家${node.isMultiCompany ? ' <span style="color:#f7c948;">(跨公司投资方)</span>' : ''}</div></div>
+          ${node.note ? `<div class="detail-row"><div class="key">备注</div><div class="val">${node.note}</div></div>` : ''}
+          <div class="detail-row"><div class="key">列表</div><div class="val">${node.appearances.map(c => `<span style="color:#79c0ff; cursor:pointer;" onclick="focusNode('co:${c}')">${c}</span>`).join('、')}</div></div>
+        </div>
+      `;
+    }
+  }
+
+  // 关联关系
+  const rels = (adj[node.id] || []).map(r => r.edge);
+  if (rels.length > 0) {
+    const grouped = { tenure: [], shareholding_q: [], shareholding_w: [], boss_link: [], co_invested: [] };
+    rels.forEach(r => grouped[r.type] && grouped[r.type].push(r));
+    html += `<div class="detail-section"><h4>🔗 关联关系 (${rels.length})</h4><ul class="rel-list">`;
+    for (const type of ['shareholding_q', 'shareholding_w', 'boss_link', 'co_invested', 'tenure']) {
+      grouped[type].forEach(e => {
+        const otherId = e.source === node.id ? e.target : e.source;
+        const other = nodes.find(x => x.id === otherId);
+        if (!other) return;
+        const typeLabel = { tenure: '任职', shareholding_q: '持股(工商)', shareholding_w: '投资(公开)', boss_link: '关键人物关联', co_invested: '同被投资' }[type];
+        const cls = { tenure: 'tenure', shareholding_q: 'shareholding-q', shareholding_w: 'shareholding-w', boss_link: 'boss', co_invested: 'co' }[type];
+        const arrow = e.source === node.id ? '→' : '←';
+        const srcBadge = e.source_label === '工商' ? '<span class="tag qichacha" style="margin-right:4px;">工商</span>' : '<span class="tag web" style="margin-right:4px;">新闻</span>';
+        html += `
+          <li class="rel-item ${cls}" onclick="focusNode('${otherId}')">
+            <div class="rel-type">${srcBadge}${typeLabel} ${arrow}</div>
+            <div class="rel-target">${other.name}</div>
+            <div class="rel-evidence">${e.label || ''}${e.round ? ' · ' + e.round : ''}</div>
+          </li>
+        `;
+      });
+    }
+    html += `</ul></div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+window.focusNode = function(id) {
+  const n = nodes.find(x => x.id === id);
+  if (!n) return;
+  showDetail(n);
+  // 重新计算跳数 + 渲染
+  state.centerId = id;
+  document.querySelectorAll('.center-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.id === id);
+  });
+  render();
+};
+
+// === 初始化控件 ===
+
+// Stats
+const statsEl = document.getElementById('stats');
+const admitted = DATA.audit?.admitted || {};
+statsEl.innerHTML = `
+  <div class="stat-pill">公司 <b>${companies.length}</b></div>
+  <div class="stat-pill">关系 <b>${edges.length}</b></div>
+  <div class="stat-pill multi">跨公司投资方 <b>${Object.values(DATA.multi_company_investors).length}</b></div>
+  <div class="stat-pill qichacha">企查查关系 <b>${admitted.qichacha || 0}</b></div>
+  <div class="stat-pill web">一手公开证据 <b>${admitted.verified_public || 0}</b></div>
+  <div class="stat-pill" style="background:#f7c94822; border-color:#f7c94888; color:#f7c948;">🔥 关键人物 <b>${(DATA.bosses||[]).length}</b></div>
+  ${(DATA.boss_coverage_ranked || []).map((b,i) => `<div class="stat-pill" style="background:${i===0?'#ff5e5e22':'#21262d'};border-color:#ff5e5e55;cursor:pointer;" title="点击查看" onclick="focusNode('keyperson:${(DATA.bosses||[]).find(x=>x.name===b.name)?.id}')">${i+1}. ${b.name.split(' (')[0].split(' /')[0]} <b style="color:#f7c948;">${b.count}</b> 家</div>`).join('')}
+`;
+
+// 中心节点选择器
+const centerPick = document.getElementById('center-pick');
+const verifiedInvestorSuggestions = [...new Set(
+  Object.values(DATA.shareholders_by_company)
+    .flat()
+    .filter(x => x.type === 'legal')
+    .map(x => x.name)
+)].map(name => {
+  const count = Object.values(DATA.shareholders_by_company)
+    .filter(records => records.some(x => x.type === 'legal' && x.name === name)).length;
+  return { id: 'sh:' + name, name, cat: 'investor', label: `已核实关联 ${count} 家` };
+}).sort((a, b) => b.label.localeCompare(a.label) || a.name.localeCompare(b.name)).slice(0, 8);
+const suggestions = [
+  // 12 家公司
+  ...companies.map(c => ({ id: 'co:' + c.short, name: c.short, cat: 'company', label: c.industry.slice(0, 12) })),
+  ...verifiedInvestorSuggestions,
+  // 关键人物节点
+  ...(DATA.bosses || []).map(b => ({ id: 'keyperson:' + b.id, name: '👑 ' + b.name, cat: 'person', label: b.title_short + ' · 投了 ' + b.covers.length + ' 家' })),
+];
+suggestions.forEach(s => {
+  const btn = document.createElement('button');
+  btn.className = 'center-btn cat-' + s.cat;
+  btn.dataset.id = s.id;
+  btn.innerHTML = `<b>${s.name}</b><br><span style="font-size:9px;opacity:0.8">${s.label}</span>`;
+  if (s.id === state.centerId) btn.classList.add('active');
+  btn.onclick = () => {
+    state.centerId = s.id;
+    document.querySelectorAll('.center-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  };
+  centerPick.appendChild(btn);
+});
+
+// 跳数控制
+document.querySelectorAll('.depth-btn').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.depth-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.depth = parseInt(b.dataset.depth);
+    render();
+  };
+});
+
+// 节点类型筛选
+const nodeTypeConfig = [
+  { key: 'company', label: '大模型公司 (12 家)', color: '#d2a8ff' },
+  { key: 'investor', label: '投资机构 (150+ 家)', color: '#79c0ff' },
+  { key: 'person', label: '投资个人 (关键人物/股东)', color: '#ff5e5e' },
+];
+const nodeTypesEl = document.getElementById('node-types');
+nodeTypeConfig.forEach(c => {
+  const div = document.createElement('label');
+  div.className = 'check-item' + (state.visibleNodeTypes[c.key] ? ' checked' : '');
+  div.innerHTML = `<input type="checkbox" ${state.visibleNodeTypes[c.key] ? 'checked' : ''}><div class="dot" style="background:${c.color}"></div><span>${c.label}</span>`;
+  const cb = div.querySelector('input');
+  cb.onchange = () => {
+    state.visibleNodeTypes[c.key] = cb.checked;
+    div.classList.toggle('checked', cb.checked);
+    render();
+  };
+  nodeTypesEl.appendChild(div);
+});
+
+// 关系类型筛选
+const edgeTypeConfig = [
+  { key: 'shareholding_q', label: '持股 (工商登记)', color: '#f7c948' },
+  { key: 'shareholding_w', label: '投资 (公开新闻)', color: '#ff9e64' },
+  { key: 'boss_link', label: '关键人物 ↔ 机构 (GP关系)', color: '#ff5e5e' },
+  { key: 'co_invested', label: '公司 ↔ 公司 (同被投资)', color: '#a5d6ff' },
+];
+const edgeTypesEl = document.getElementById('edge-types');
+edgeTypeConfig.forEach(c => {
+  const div = document.createElement('label');
+  div.className = 'check-item' + (state.visibleEdgeTypes[c.key] ? ' checked' : '');
+  div.innerHTML = `<input type="checkbox" ${state.visibleEdgeTypes[c.key] ? 'checked' : ''}><div class="dot" style="background:${c.color}"></div><span>${c.label}</span>`;
+  const cb = div.querySelector('input');
+  cb.onchange = () => {
+    state.visibleEdgeTypes[c.key] = cb.checked;
+    div.classList.toggle('checked', cb.checked);
+    render();
+  };
+  edgeTypesEl.appendChild(div);
+});
+
+// 搜索
+let searchTimer = null;
+document.getElementById('search').addEventListener('input', (e) => {
+  clearTimeout(searchTimer);
+  const val = e.target.value.trim();
+  searchTimer = setTimeout(() => {
+    if (!val) return;
+    const lower = val.toLowerCase();
+    const found = nodes.find(n => n.name.toLowerCase().includes(lower));
+    if (found) focusNode(found.id);
+  }, 250);
+});
+
+// 工具栏
+document.getElementById('btn-recenter').onclick = () => chart.dispatchAction({ type: 'restore' });
+document.getElementById('btn-fit').onclick = () => chart.dispatchAction({ type: 'restore' });
+
+window.addEventListener('resize', () => chart.resize());
+
+// 初始渲染
+render();
+setTimeout(() => focusNode(state.centerId), 500);
+</script>
+</body>
+</html>
