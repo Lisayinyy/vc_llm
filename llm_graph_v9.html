@@ -403,7 +403,8 @@ Object.entries(DATA.shareholders_by_company).forEach(([coShort, shs]) => {
       target: 'co:' + coShort,
       type: edgeType,
       label: typeof sh.ratio === 'number' ? sh.ratio.toFixed(2) + '%' : sh.ratio,
-      weight: typeof sh.ratio === 'number' ? Math.max(1, sh.ratio / 5) : 0.5,
+      // weight: 反映持股比例. 上限 2.5 (避免 50%+ 边过粗)
+      weight: typeof sh.ratio === 'number' ? Math.min(2.5, Math.max(0.5, sh.ratio / 5)) : 0.5,
       ratio: sh.ratio,
       round: sh.round || '',
       source_label: sh.source === 'qichacha' ? '工商' : '公开',
@@ -523,7 +524,7 @@ Object.entries(DATA.controllers_by_company || {}).forEach(([coShort, ctrls]) => 
       target: 'co:' + coShort,
       type: 'shareholding_w',
       label: `实控 ${c.total || '?'}%`,
-      weight: 3,
+      weight: 2,  // 实控人边
       ratio: c.total,
       source_label: c.source || 'web',
     });
