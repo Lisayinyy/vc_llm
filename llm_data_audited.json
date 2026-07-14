@@ -1,0 +1,2162 @@
+{
+  "version": "v4-audited-1",
+  "summary": {
+    "total_companies": 12,
+    "total_categories": 4,
+    "data_source": {
+      "qichacha_registration": "12/12 ✅",
+      "qichacha_shareholders": "5/12 ✅（智谱/月之暗面/百川/MiniMax/零一万物）",
+      "qichacha_controller": "4/12 ✅",
+      "qichacha_executives": "5/12 ✅",
+      "web_search_investors": "7/7 公开融资 ✅（阶跃/生数/DeepSeek/面壁/衔远/无问芯穹/瑞莱）"
+    },
+    "key_findings": {
+      "multi_company_investors_count": 11,
+      "top_multi_investors": [
+        [
+          "启明创投",
+          [
+            "无问芯穹",
+            "生数科技",
+            "衔远科技",
+            "阶跃星辰"
+          ]
+        ],
+        [
+          "北京市人工智能产业投资基金",
+          [
+            "面壁智能",
+            "生数科技",
+            "瑞莱智慧"
+          ]
+        ],
+        [
+          "红杉中国",
+          [
+            "无问芯穹",
+            "阶跃星辰"
+          ]
+        ],
+        [
+          "IDG资本",
+          [
+            "阶跃星辰",
+            "深度求索"
+          ]
+        ],
+        [
+          "顺为资本",
+          [
+            "无问芯穹",
+            "阶跃星辰"
+          ]
+        ],
+        [
+          "联想创投",
+          [
+            "无问芯穹",
+            "阶跃星辰"
+          ]
+        ],
+        [
+          "达泰资本",
+          [
+            "生数科技",
+            "瑞莱智慧"
+          ]
+        ],
+        [
+          "中关村科学城",
+          [
+            "面壁智能",
+            "生数科技"
+          ]
+        ],
+        [
+          "蚂蚁集团",
+          [
+            "生数科技",
+            "瑞莱智慧"
+          ]
+        ],
+        [
+          "洪泰基金",
+          [
+            "无问芯穹",
+            "面壁智能"
+          ]
+        ]
+      ],
+      "companies_with_disclosed_rounds": [
+        "阶跃星辰: B+ 50亿+(2026.01)",
+        "生数科技: B轮 20亿(2026.04)",
+        "深度求索: A轮 510亿(2026.05)",
+        "面壁智能: D+轮 2026.04",
+        "衔远科技: 天使轮 2023.03 数亿元",
+        "无问芯穹: B轮 超7亿(2026.05)",
+        "瑞莱智慧: 战略/B+轮 2026.05"
+      ]
+    },
+    "total_unique_investors": 150,
+    "audit_status": "strict",
+    "verified_relationships": 38,
+    "unverified_relationships": 126,
+    "verified_public_relationships": 1
+  },
+  "default_center": "智谱",
+  "default_center_reason": "严格证据集暂不支持原有跨公司投资方排名",
+  "companies": [
+    {
+      "name": "北京智谱华章科技股份有限公司",
+      "short": "智谱",
+      "uscc": "91110108MA01KP2T5U",
+      "legal_rep": "刘德兵",
+      "register_capital_wan": 4458.4309,
+      "establish_date": "2019-06-11",
+      "location": "北京",
+      "listing": "上市(港股)",
+      "industry": "通用大模型 GLM",
+      "employee_count": 789,
+      "company_type": "股份有限公司（外商投资、上市）",
+      "category": "通用大模型",
+      "founding_team": "清华系"
+    },
+    {
+      "name": "北京月之暗面科技有限公司",
+      "short": "月之暗面",
+      "uscc": "91110108MACG2KBH8F",
+      "legal_rep": "杨植麟",
+      "register_capital_wan": 152.3585,
+      "establish_date": "2023-04-17",
+      "location": "北京",
+      "listing": "未上市(独角兽)",
+      "industry": "Kimi 长文本大模型",
+      "employee_count": 233,
+      "company_type": "有限责任公司（自然人投资或控股）",
+      "category": "通用大模型",
+      "founding_team": "杨植麟团队"
+    },
+    {
+      "name": "百川智能科技有限公司",
+      "short": "百川智能",
+      "uscc": "91110108MACBM7E07B",
+      "legal_rep": "王小川",
+      "register_capital_wan": 647.6684,
+      "establish_date": "2023-03-24",
+      "location": "北京",
+      "listing": "未上市",
+      "industry": "百川大模型 (医疗方向)",
+      "employee_count": 200,
+      "company_type": "有限责任公司（自然人投资或控股）",
+      "category": "通用大模型",
+      "founding_team": "王小川"
+    },
+    {
+      "name": "上海稀宇极智科技有限公司",
+      "short": "MiniMax",
+      "uscc": "91310000MA7CGN828C",
+      "legal_rep": "闫俊杰",
+      "register_capital_wan": 400000.0,
+      "establish_date": "2021-11-03",
+      "location": "上海",
+      "listing": "未上市(独角兽)",
+      "industry": "MiniMax / 海螺 AI / Talkie (通用对话+多模态视频)",
+      "employee_count": 269,
+      "company_type": "有限责任公司（港澳台法人独资）",
+      "category": "通用大模型",
+      "founding_team": "闫俊杰（叶双宁）"
+    },
+    {
+      "name": "北京零一万物科技有限公司",
+      "short": "零一万物",
+      "uscc": "91110108MACGNQDM2B",
+      "legal_rep": "马杰",
+      "register_capital_wan": 10000.0,
+      "establish_date": "2023-05-16",
+      "location": "北京",
+      "listing": "未上市",
+      "industry": "Yi 大模型 (李开复系)",
+      "employee_count": 0,
+      "company_type": "有限责任公司（外商投资企业法人独资）",
+      "category": "通用大模型",
+      "founding_team": "李开复/创新工场系"
+    },
+    {
+      "name": "上海阶跃星辰智能科技股份有限公司",
+      "short": "阶跃星辰",
+      "uscc": "91310104MACE0YX639",
+      "legal_rep": "印奇",
+      "register_capital_wan": 6657.6028,
+      "establish_date": "2023-04-06",
+      "location": "上海",
+      "listing": "未上市(独角兽,拟港股IPO)",
+      "industry": "Step 大模型 (姜大昕/微软系)",
+      "employee_count": 214,
+      "company_type": "股份有限公司（港澳台投资、未上市）",
+      "category": "通用大模型",
+      "founding_team": "姜大昕（前微软）+印奇/旷视"
+    },
+    {
+      "name": "北京生数科技股份有限公司",
+      "short": "生数科技",
+      "uscc": "91110108MACC4D63XF",
+      "legal_rep": "鲍凡",
+      "register_capital_wan": 1701.0235,
+      "establish_date": "2023-03-06",
+      "location": "北京",
+      "listing": "未上市",
+      "industry": "Vidu 视频生成大模型 (清华系)",
+      "employee_count": 119,
+      "company_type": "股份有限公司（港澳台投资、未上市）",
+      "category": "多模态大模型(视频)",
+      "founding_team": "朱军/唐家渝/鲍凡（清华AI院）"
+    },
+    {
+      "name": "杭州深度求索人工智能基础技术研究有限公司",
+      "short": "深度求索",
+      "uscc": "91330105MACPN4X08Y",
+      "legal_rep": "裴湉",
+      "register_capital_wan": 1500.0,
+      "establish_date": "2023-07-17",
+      "location": "杭州",
+      "listing": "未上市(独角兽)",
+      "industry": "DeepSeek 通用大模型 (幻方系)",
+      "employee_count": 46,
+      "company_type": "其他有限责任公司",
+      "category": "通用大模型",
+      "founding_team": "梁文锋（幻方量化）"
+    },
+    {
+      "name": "北京面壁智能科技有限责任公司",
+      "short": "面壁智能",
+      "uscc": "91110108MABU8XJRXD",
+      "legal_rep": "曾国洋",
+      "register_capital_wan": 77.29165,
+      "establish_date": "2022-08-12",
+      "location": "北京",
+      "listing": "未上市(独角兽)",
+      "industry": "MiniCPM 端侧大模型 (清华系)",
+      "employee_count": 205,
+      "company_type": "有限责任公司（港澳台投资、非独资）",
+      "category": "端侧大模型",
+      "founding_team": "清华NLP实验室（刘知远等）"
+    },
+    {
+      "name": "北京衔远科技有限公司",
+      "short": "衔远科技",
+      "uscc": "91110105MA04GN5E7L",
+      "legal_rep": "周怡文",
+      "register_capital_wan": 500.0,
+      "establish_date": "2021-10-29",
+      "location": "北京",
+      "listing": "未上市",
+      "industry": "ProductGPT 圆桌大模型 (周伯文/京东系)",
+      "employee_count": 32,
+      "company_type": "有限责任公司（自然人独资）",
+      "category": "应用/行业大模型",
+      "founding_team": "周伯文（前京东技术委员会主席）"
+    },
+    {
+      "name": "上海无问芯穹智能科技股份有限公司",
+      "short": "无问芯穹",
+      "uscc": "91310104MACJB73JXU",
+      "legal_rep": "李玉晨",
+      "register_capital_wan": 271.1934,
+      "establish_date": "2023-05-31",
+      "location": "上海",
+      "listing": "未上市",
+      "industry": "AI Infra 算力调度 (清华系)",
+      "employee_count": 99,
+      "company_type": "股份有限公司（港澳台投资、未上市）",
+      "category": "AI Infra",
+      "founding_team": "汪玉（清华电子系系主任）+夏立雪"
+    },
+    {
+      "name": "北京瑞莱智慧科技有限公司",
+      "short": "瑞莱智慧",
+      "uscc": "91110108MA01DNC75B",
+      "legal_rep": "田天",
+      "register_capital_wan": 1236.2761,
+      "establish_date": "2018-07-25",
+      "location": "北京",
+      "listing": "未上市",
+      "industry": "RealAI 安全可控 AI (清华系)",
+      "employee_count": 100,
+      "company_type": "其他有限责任公司",
+      "category": "AI 安全",
+      "founding_team": "田天/朱军/张钹（清华AI院）"
+    }
+  ],
+  "shareholders_by_company": {
+    "智谱": [
+      {
+        "name": "北京链湃科技发展中心（有限合伙）",
+        "type": "legal",
+        "ratio": 7.63,
+        "source": "qichacha",
+        "note": "创始团队持股平台",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "珠海横琴慧惠企业管理合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 7.53,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "唐杰",
+        "type": "natural",
+        "ratio": 6.02,
+        "source": "qichacha",
+        "note": "清华计算机系教授",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "珠海横琴智登企业管理合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 5.18,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "苏州君联相道股权投资合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 4.19,
+        "source": "qichacha",
+        "note": "君联资本",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "天津三快科技有限公司",
+        "type": "legal",
+        "ratio": 3.86,
+        "source": "qichacha",
+        "note": "美团系",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "蚂蚁科技集团股份有限公司",
+        "type": "legal",
+        "ratio": 3.61,
+        "source": "qichacha",
+        "note": "蚂蚁集团",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "华控技术转移有限公司",
+        "type": "legal",
+        "ratio": 3.48,
+        "source": "qichacha",
+        "note": "清华控股",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "全德美嘉有限公司",
+        "type": "legal",
+        "ratio": 2.55,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "陈浩",
+        "type": "natural",
+        "ratio": 1.89,
+        "source": "qichacha",
+        "note": "智谱高管",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "李涓子",
+        "type": "natural",
+        "ratio": 0.76,
+        "source": "qichacha",
+        "note": "清华教授",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "刘德兵",
+        "type": "natural",
+        "ratio": 0.21,
+        "source": "qichacha",
+        "note": "董事长",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "许斌",
+        "type": "natural",
+        "ratio": 0.18,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "张鹏",
+        "type": "natural",
+        "ratio": 0.09,
+        "source": "qichacha",
+        "note": "CEO",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      }
+    ],
+    "月之暗面": [
+      {
+        "name": "杨植麟",
+        "type": "natural",
+        "ratio": 51.83,
+        "source": "qichacha",
+        "note": "创始人/CEO/董事",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "深圳和谐成长三期科技发展股权投资基金合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 11.76,
+        "source": "qichacha",
+        "note": "红杉中国",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "周昕宇",
+        "type": "natural",
+        "ratio": 6.56,
+        "source": "qichacha",
+        "note": "联合创始人",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "南昌和谐安瑞股权投资合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 4.69,
+        "source": "qichacha",
+        "note": "红杉系",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "华月创智（青岛）创业投资基金合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 4.23,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "社保基金长三角科技创新股权投资基金（上海）合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 4.0,
+        "source": "qichacha",
+        "note": "社保基金",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "吴育昕",
+        "type": "natural",
+        "ratio": 3.91,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "张宇韬",
+        "type": "natural",
+        "ratio": 3.33,
+        "source": "qichacha",
+        "note": "监事",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "青岛仪象奔富创业投资基金合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 2.49,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "前沿同创（扬州）产业升级股权投资基金合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 2.03,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "和谐远达（宜兴）文化产业投资基金（有限合伙）",
+        "type": "legal",
+        "ratio": 1.88,
+        "source": "qichacha",
+        "note": "红杉系",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "共青城君弘前沿创业投资合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 1.83,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "临港前沿阿特斯扬州新能源股权投资基金合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 1.44,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      }
+    ],
+    "百川智能": [
+      {
+        "name": "王小川",
+        "type": "natural",
+        "ratio": 76.428,
+        "source": "qichacha",
+        "note": "创始人/CEO",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "百川众智（北京）管理咨询合伙企业（有限合伙）",
+        "type": "legal",
+        "ratio": 20.0,
+        "source": "qichacha",
+        "note": "员工持股平台",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "许志翰",
+        "type": "natural",
+        "ratio": 1.0,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "高燃",
+        "type": "natural",
+        "ratio": 1.0,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "茹立云",
+        "type": "natural",
+        "ratio": 0.772,
+        "source": "qichacha",
+        "note": "联合创始人/监事",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "蒋又新",
+        "type": "natural",
+        "ratio": 0.4,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "王子文",
+        "type": "natural",
+        "ratio": 0.2,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      },
+      {
+        "name": "焦可",
+        "type": "natural",
+        "ratio": 0.2,
+        "source": "qichacha",
+        "note": "",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      }
+    ],
+    "MiniMax": [
+      {
+        "name": "香港稀宇极智有限公司",
+        "type": "legal",
+        "ratio": 100.0,
+        "source": "qichacha",
+        "note": "VIE 境外母公司",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      }
+    ],
+    "零一万物": [
+      {
+        "name": "北京零一万物智能技术有限公司",
+        "type": "legal",
+        "ratio": 100.0,
+        "source": "qichacha",
+        "note": "WFOE 母公司",
+        "status": "trusted_by_user",
+        "evidence_level": "registry",
+        "as_of": "2026-07-13/14"
+      }
+    ],
+    "阶跃星辰": [],
+    "生数科技": [],
+    "深度求索": [],
+    "面壁智能": [],
+    "衔远科技": [],
+    "无问芯穹": [
+      {
+        "name": "启明创投",
+        "type": "legal",
+        "ratio": "未披露",
+        "source": "web",
+        "round": "A轮 近5亿",
+        "note": "领投",
+        "relation": "invested_in",
+        "status": "verified",
+        "evidence_level": "primary",
+        "publisher": "启明创投",
+        "published_at": "2024-09-02",
+        "accessed_at": "2026-07-14",
+        "source_url": "https://www.qimingvc.com/cn/news/%E5%90%AF%E6%98%8E%E6%98%9F-%E6%97%A0%E9%97%AE%E8%8A%AF%E7%A9%B9%E8%8E%B7%E8%BF%9110%E4%BA%BF%E5%85%83%E7%B4%AF%E8%AE%A1%E8%9E%8D%E8%B5%84%EF%BC%8C%E5%90%AF%E6%98%8E%E5%88%9B%E6%8A%95%E8%81%94%E5%90%88%E9%A2%86%E6%8A%95a%E8%BD%AE",
+        "evidence_quote": "无问芯穹获近10亿元累计融资，启明创投联合领投A轮"
+      }
+    ],
+    "瑞莱智慧": []
+  },
+  "controllers_by_company": {
+    "智谱": null,
+    "月之暗面": [
+      {
+        "name": "杨植麟",
+        "direct": 51.83,
+        "total": 51.83,
+        "voting": 51.83,
+        "source": "qichacha",
+        "status": "trusted_by_user",
+        "evidence_level": "registry"
+      }
+    ],
+    "百川智能": [
+      {
+        "name": "王小川",
+        "direct": 76.428,
+        "total": 92.428,
+        "voting": 96.428,
+        "source": "qichacha",
+        "status": "trusted_by_user",
+        "evidence_level": "registry"
+      }
+    ],
+    "MiniMax": [
+      {
+        "name": "闫俊杰",
+        "direct": 0,
+        "total": 100,
+        "voting": 100,
+        "source": "qichacha",
+        "status": "trusted_by_user",
+        "evidence_level": "registry"
+      }
+    ],
+    "零一万物": [
+      {
+        "name": "零一万物（香港）有限公司",
+        "total": 100,
+        "voting": 100,
+        "source": "qichacha",
+        "status": "trusted_by_user",
+        "evidence_level": "registry"
+      }
+    ],
+    "阶跃星辰": [],
+    "生数科技": [],
+    "深度求索": [],
+    "面壁智能": [],
+    "衔远科技": [],
+    "无问芯穹": [],
+    "瑞莱智慧": []
+  },
+  "multi_company_investors": {},
+  "company_company_edges": [],
+  "bosses": [],
+  "boss_investor_relations": [],
+  "boss_coverage_ranked": [],
+  "data_discipline": {
+    "qichacha": "工商登记口径，一级持股（不含间接），不含期权/ESOP",
+    "web": "公开融资新闻（财联社/36氪/证券时报/品玩/腾讯新闻等），持股比例未披露的写'未披露'",
+    "accuracy_notes": [
+      "梁文锋 84.29% 是 2026.04 工商增资后的数据，A 轮 510 亿融资后未再披露最新股权",
+      "MiniMax/零一万物通过 VIE/WFOE 母公司间接控股，国内主体股权简单",
+      "百川智能 76.4% 是创始人个人+员工持股平台合计，外部投资较少（公司较早期）",
+      "阶跃星辰/生数科技/DeepSeek 等近期密集融资，工商登记未必最新"
+    ]
+  },
+  "audit": {
+    "policy": "qichacha_trusted_by_user_plus_record_level_primary_evidence",
+    "generated_at": "2026-07-14",
+    "admitted": {
+      "qichacha": 37,
+      "verified_public": 1
+    },
+    "excluded_unverified": 126,
+    "known_issue_count": 6
+  },
+  "unverified_relationships": [
+    {
+      "company": "阶跃星辰",
+      "name": "腾讯投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "战略+跟投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "启明创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "战略+跟投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "五源资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "战略+跟投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "上国投先导基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "上海国资",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "国寿股权",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "浦东创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "徐汇资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "无锡梁溪基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "厦门国贸",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "华勤技术",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B+ 50亿+(2026.01)",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "华勤",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "Pre-IPO 25亿美元(2026.05)",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "龙旗",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "Pre-IPO 25亿美元(2026.05)",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "豪威",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "Pre-IPO 25亿美元(2026.05)",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "中兴",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "Pre-IPO 25亿美元(2026.05)",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "香港投资管理有限公司",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "Pre-IPO 25亿美元(2026.05)",
+      "note": "港府投资",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "红杉中国",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "历史融资",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "IDG资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "历史融资",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "顺为资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "历史融资",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "阶跃星辰",
+      "name": "联想创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "历史融资",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "阿里云",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "中网投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "国家网信办基金",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "九安海棠",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "好未来",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "教育产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "光合创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "BV百度风投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "百度战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "星连资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "达泰资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "建发新兴投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "卓源亚洲",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 20亿(2026.04)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "中关村科学城",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 6亿+(2025.02)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "万兴科技",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 6亿+(2025.02)",
+      "note": "上市公司战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "视觉中国",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 6亿+(2025.02)",
+      "note": "上市公司战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "拓尔思",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 6亿+(2025.02)",
+      "note": "上市公司战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "启明创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "北京市人工智能产业投资基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "北京国资",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "博华资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 领投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "百度战投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "蚂蚁集团",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使轮 领投",
+      "note": "孵化方",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "生数科技",
+      "name": "瑞莱智慧",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "孵化方",
+      "note": "联合孵化（与蚂蚁、百度）",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "梁文锋",
+      "type": "natural",
+      "ratio": "84.29%(含间接)/40%出资",
+      "source": "web",
+      "round": "A轮 510亿(2026.05)",
+      "note": "创始人/CEO，200亿自有资金领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "腾讯",
+      "type": "legal",
+      "ratio": "未披露(出资100亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "战投/无投票权",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "宁德时代",
+      "type": "legal",
+      "ratio": "未披露(出资50亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "溥泉资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "宁德时代系",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "京东",
+      "type": "legal",
+      "ratio": "未披露(出资30亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "网易",
+      "type": "legal",
+      "ratio": "未披露(出资30亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "Monolith砺思资本",
+      "type": "legal",
+      "ratio": "未披露(出资30亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "IDG资本",
+      "type": "legal",
+      "ratio": "未披露(出资30亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "正心谷投资",
+      "type": "legal",
+      "ratio": "未披露(出资15亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "拾象科技",
+      "type": "legal",
+      "ratio": "未披露(出资15亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "国家人工智能产业投资基金",
+      "type": "legal",
+      "ratio": "未披露(出资9.8亿)",
+      "source": "web",
+      "round": "A轮 510亿",
+      "note": "国家队",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "深度求索",
+      "name": "宁波程恩企业管理咨询合伙企业",
+      "type": "legal",
+      "ratio": "66%(原大股东)",
+      "source": "web",
+      "round": "增资前",
+      "note": "梁文锋控股平台",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "深创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D+轮 2026.04",
+      "note": "深圳国资/领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "汇川产投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D+轮 2026.04",
+      "note": "汇川技术/产业资本/领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "道禾长期投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D+轮 2026.04",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "国泰君安创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D+轮 2026.04",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "武岳峰科创",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D+轮 2026.04",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "中国电信",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D轮 2026.02",
+      "note": "战略/领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "中信金石",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D轮 2026.02",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "中信私募",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "D轮 2026.02",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "京国瑞",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "C轮 2025.12",
+      "note": "北京国资",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "国科投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "C轮 2025.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "中金保时捷基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "C轮 2025.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "米聚资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "C轮 2025.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "和基投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "C轮 2025.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "洪泰基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 2025.05",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "国中资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 2025.05",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "清控金信资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 2025.05",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "茅台基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 2025.05",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "龙芯创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 2024.12",
+      "note": "产业资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "鼎晖百孚",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 2024.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "中关村科学城",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 2024.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "赛富投资基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 2024.12",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "北京市人工智能产业投资基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 2024.12",
+      "note": "北京国资",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "春华资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 2024.04",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "哈勃投资(华为)",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 2024.04",
+      "note": "华为战投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "知乎",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮/天使",
+      "note": "战略股东",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "面壁智能",
+      "name": "智谱AI",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使",
+      "note": "战略合作",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "衔远科技",
+      "name": "启明创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使轮 2023.03 数亿元",
+      "note": "领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "衔远科技",
+      "name": "经纬创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使轮 2023.03 数亿元",
+      "note": "跟投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "杭州高新金投集团",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿(2026.05)",
+      "note": "杭州国资/领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "惠远资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "联合领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "国兴资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "国家资本",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "秦淮数据",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "数据中心运营商",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "广发乾和",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "力合清瞳",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "中保投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "国家队",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "AEFNextGen",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "腾瑞资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "卡莱特",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "中信建投资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "宽德智能",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B轮 超7亿",
+      "note": "量化基金",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "君联资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B/A+轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "上海国投孚腾",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B/A+轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "元智未来",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "B/A+轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "珠海科技集团",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 5亿(2025.11)",
+      "note": "珠海国资/领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "孚腾资本(元创未来基金)",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 5亿",
+      "note": "联合领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "尚颀资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 5亿",
+      "note": "上汽集团系",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "弘晖基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+轮 5亿",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "洪泰基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "达晨财智",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "尚势资本&海棠基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "联想创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "战略",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "申万宏源",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "徐汇科创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A+/A轮 跟投",
+      "note": "上海徐汇国资",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "社保基金中关村自主创新专项基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 近5亿(2024.09)",
+      "note": "国家社保/领投",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "小米",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 跟投",
+      "note": "战略",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "软通高科",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "国开科创",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 跟投",
+      "note": "国家开发银行",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "上海人工智能产业投资基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 跟投",
+      "note": "上海AI基金",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "顺为资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 跟投",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "百度",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "战略股东",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "智谱",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "战略股东",
+      "note": "战略协同",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "红杉中国",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使/历史",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "北极光创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使/历史",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "真格基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使/历史",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "经纬创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使/历史",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "无问芯穹",
+      "name": "金沙江创投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使/历史",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "北京市人工智能产业投资基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "战略/B+轮 2026.05",
+      "note": "北京AI基金",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "蚂蚁集团",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮 3亿+ (2021.10)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "中国互联网投资基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮",
+      "note": "国家队",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "深圳领信基石投资",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "达泰资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "卓源资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "A轮",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "松禾资本",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使+",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "百度风投",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    },
+    {
+      "company": "瑞莱智慧",
+      "name": "英诺天使基金",
+      "type": "legal",
+      "ratio": "未披露",
+      "source": "web",
+      "round": "天使 3335万(2019.01)",
+      "note": "",
+      "status": "unverified",
+      "exclusion_reason": "missing_record_level_evidence"
+    }
+  ]
+}

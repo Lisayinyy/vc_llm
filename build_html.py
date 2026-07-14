@@ -5,8 +5,11 @@
 import json
 from pathlib import Path
 
-OUT = Path("/workspace/llm-graph")
-with open(OUT / "llm_data_v4.json", encoding="utf-8") as f:
+OUT = Path(__file__).resolve().parent
+data_path = OUT / "llm_data_audited.json"
+if not data_path.exists():
+    data_path = OUT / "llm_data_v4.json"
+with open(data_path, encoding="utf-8") as f:
     data = json.load(f)
 
 data_json = json.dumps(data, ensure_ascii=False)
@@ -15,7 +18,7 @@ HTML = r"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
-<title>中国大模型 × 投资方 × 投资个人 · v6 (3类节点, 关键人物)</title>
+<title>中国大模型产业投资关系图谱 · 严格证据集</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
   :root {
@@ -239,8 +242,8 @@ HTML = r"""<!DOCTYPE html>
 <div class="app">
   <div class="header">
     <div class="title-block">
-      <h1>🤖 中国大模型公司 × 投资方人脉图谱</h1>
-      <div class="sub">12 家头部大模型公司 × 工商登记 + 公开融资 · 数据：企查查 (2026-07) + 财联社/36氪/证券时报</div>
+      <h1>中国大模型公司 × 投资方关系图谱</h1>
+      <div class="sub">严格证据集 · 企查查记录 + 具备逐条一手证据的公开关系</div>
     </div>
     <div class="stats-bar" id="stats"></div>
   </div>
@@ -275,11 +278,11 @@ HTML = r"""<!DOCTYPE html>
       </div>
 
       <div class="info-box" style="border-left-color: var(--share-w);">
-        <b>📊 数据来源：</b><br>
-        · 5 家公司股东来自 <b style="color:#56d364;">企查查工商登记</b><br>
-        · 7 家公司股东来自 <b style="color:#ff9e64;">公开融资新闻</b><br>
-        · 持股比例未披露的写"未披露"<br>
-        · VIE 架构公司显示母公司 100% 持股
+        <b>数据口径：</b><br>
+        · 企查查关系按用户指定口径保留<br>
+        · 公开关系必须具备逐条一手证据<br>
+        · 待核验记录不构边、不参与排名<br>
+        · 人物关系不得从机构组合推断
       </div>
     </div>
 
@@ -339,22 +342,24 @@ HTML = r"""<!DOCTYPE html>
   </div>
 
   <div class="footer-bar">
-    数据：企查查工商登记（5 家）+ 公开融资新闻（7 家）· 持股比例未披露的写"未披露" · 不含期权/ESOP/间接持股
+    未核实公开关系不参与图谱与排名 · 证据规则与已知问题见 DATA_AUDIT.md
   </div>
 </div>
 
 <script>
 const DATA = __DATA__;
+const companies = DATA.companies;
 
 const state = {
-  centerId: 'sh:启明创投', // 默认 = 投资方中心 (跨4家最多)
+  centerId: DATA.default_center && companies.some(c => c.short === DATA.default_center)
+    ? 'co:' + DATA.default_center
+    : 'co:' + companies[0].short,
   depth: 2,
   visibleNodeTypes: { company: true, investor: true, person: true },
   visibleEdgeTypes: { shareholding_q: true, shareholding_w: true, boss_link: true, co_invested: true },
 };
 
 // 节点数据：12 家公司
-const companies = DATA.companies;
 const short2idx = {};
 companies.forEach((c, i) => short2idx[c.short] = i);
 
@@ -846,29 +851,33 @@ window.focusNode = function(id) {
 
 // Stats
 const statsEl = document.getElementById('stats');
+const admitted = DATA.audit?.admitted || {};
 statsEl.innerHTML = `
   <div class="stat-pill">公司 <b>${companies.length}</b></div>
   <div class="stat-pill">关系 <b>${edges.length}</b></div>
   <div class="stat-pill multi">跨公司投资方 <b>${Object.values(DATA.multi_company_investors).length}</b></div>
-  <div class="stat-pill" style="background:#ff5e5e22; border-color:#ff5e5e55;">👑 关键人物 <b>${(DATA.bosses||[]).length}</b></div>
-  <div class="stat-pill qichacha">企查查 <b>5</b></div>
-  <div class="stat-pill web">公开新闻 <b>7</b></div>
+  <div class="stat-pill qichacha">企查查关系 <b>${admitted.qichacha || 0}</b></div>
+  <div class="stat-pill web">一手公开证据 <b>${admitted.verified_public || 0}</b></div>
+  <div class="stat-pill">待核验 <b>${DATA.audit?.excluded_unverified || 0}</b></div>
   ${(DATA.boss_coverage_ranked || []).map((b,i) => `<div class="stat-pill" style="background:${i===0?'#ff5e5e22':'#21262d'};border-color:#ff5e5e55;cursor:pointer;" title="点击查看" onclick="focusNode('keyperson:${(DATA.bosses||[]).find(x=>x.name===b.name)?.id}')">${i+1}. ${b.name.split(' (')[0].split(' /')[0]} <b style="color:#f7c948;">${b.count}</b> 家</div>`).join('')}
 `;
 
 // 中心节点选择器
 const centerPick = document.getElementById('center-pick');
+const verifiedInvestorSuggestions = [...new Set(
+  Object.values(DATA.shareholders_by_company)
+    .flat()
+    .filter(x => x.type === 'legal')
+    .map(x => x.name)
+)].map(name => {
+  const count = Object.values(DATA.shareholders_by_company)
+    .filter(records => records.some(x => x.type === 'legal' && x.name === name)).length;
+  return { id: 'sh:' + name, name, cat: 'investor', label: `已核实关联 ${count} 家` };
+}).sort((a, b) => b.label.localeCompare(a.label) || a.name.localeCompare(b.name)).slice(0, 8);
 const suggestions = [
   // 12 家公司
   ...companies.map(c => ({ id: 'co:' + c.short, name: c.short, cat: 'company', label: c.industry.slice(0, 12) })),
-  // 重点投资机构
-  { id: 'sh:启明创投', name: '💰 启明创投', cat: 'investor', label: '投了 4 家 12 强' },
-  { id: 'sh:北京市人工智能产业投资基金', name: '💰 北京 AI 国资', cat: 'investor', label: '投了 3 家' },
-  { id: 'sh:红杉中国', name: '💰 红杉中国', cat: 'investor', label: '投了 2 家' },
-  { id: 'sh:IDG资本', name: '💰 IDG 资本', cat: 'investor', label: '投了 2 家' },
-  { id: 'sh:蚂蚁集团', name: '💰 蚂蚁集团', cat: 'investor', label: '投了 2 家' },
-  { id: 'sh:阿里云', name: '💰 阿里云', cat: 'investor', label: '生数领投' },
-  { id: 'sh:腾讯', name: '💰 腾讯', cat: 'investor', label: '投了 3 家' },
+  ...verifiedInvestorSuggestions,
   // 关键人物节点
   ...(DATA.bosses || []).map(b => ({ id: 'keyperson:' + b.id, name: '👑 ' + b.name, cat: 'person', label: b.title_short + ' · 投了 ' + b.covers.length + ' 家' })),
 ];
@@ -967,10 +976,12 @@ setTimeout(() => focusNode(state.centerId), 500);
 
 html_final = HTML.replace("__DATA__", data_json)
 out_path = OUT / "llm_graph_v6.html"
-with open(out_path, "w", encoding="utf-8") as f:
-    f.write(html_final)
+index_path = OUT / "index.html"
+for path in (out_path, index_path):
+    path.write_text(html_final, encoding="utf-8")
 
 print(f"✅ HTML v3 已生成: {out_path}")
+print(f"   入口已同步: {index_path}")
 print(f"   文件大小: {out_path.stat().st_size / 1024:.1f} KB")
 print()
 print("📊 数据规模:")

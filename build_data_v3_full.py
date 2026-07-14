@@ -16,7 +16,7 @@
 import json
 from pathlib import Path
 
-OUT = Path("/workspace/llm-graph")
+OUT = Path(__file__).resolve().parent
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ===== 12 家公司工商信息（已从企查查拉到） =====

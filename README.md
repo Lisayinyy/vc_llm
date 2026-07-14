@@ -81,6 +81,19 @@ vc_llm/
 - 不披露的写"未披露"，不补全
 - 不含期权/ESOP/间接持股
 
+## 数据准确性审计
+
+原始 `llm_data_v4.json` 中的 `source: web` 只表示通过公开网页收集，不能视为已核实证据。审计发现 127 条公开关系均缺少逐条来源 URL、发布日期和证据摘录，并存在人物归因过度、关系类型混用、日期冲突与机构别名重复。
+
+用于严肃分析时请运行：
+
+```bash
+python3 audit_data.py
+python3 build_html.py
+```
+
+图谱生成器会优先读取 `llm_data_audited.json`。严格数据集目前只纳入用户指定可信的企查查记录，以及具备逐条一手证据的公开关系；其余记录保留在 `unverified_relationships`，但不参与关系图和排名。完整问题与准入规则见 [`DATA_AUDIT.md`](DATA_AUDIT.md)。
+
 ## 📜 License
 
 MIT

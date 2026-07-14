@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 
-BASE = Path('/workspace/llm-graph')
+BASE = Path(__file__).resolve().parent
 src = json.load(open(BASE / 'llm_data_v3_full.json'))
 
 # 6 个老大 (来自 web 公开人物调研)
