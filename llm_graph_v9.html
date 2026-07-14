@@ -760,17 +760,17 @@ function showDetail(node) {
     </div>
   `;
 
-  // 关键人物节点详情面板
+  // 关键人物节点详情面板 (仅供 GP 关系参考, 不作为独立投资方计入)
   if (node.type === 'person' && node.isBoss) {
     const covers = node.covers || [];
     html += `
       <div class="detail-section">
-        <h4>👑 关键人物档案</h4>
+        <h4>👤 关键人物档案 (GP 关联)</h4>
         <div class="detail-row"><div class="key">职位</div><div class="val" style="color:#ff5e5e; font-weight:bold;">${node.title || node.title_short}</div></div>
-        <div class="detail-row"><div class="key">所在机构</div><div class="val">${node.company}</div></div>
-        <div class="detail-row"><div class="key">投资 12 强</div><div class="val" style="color:#f7c948; font-weight:bold;">${covers.length} 家</div></div>
+        <div class="detail-row"><div class="key">所在机构</div><div class="val" style="cursor:pointer;" onclick="focusNode('sh:${node.company}')">${node.company}</div></div>
+        <div class="detail-row"><div class="key">角色</div><div class="val" style="color:#8b949e; font-size:11px;">仅作为该机构的 GP 代表。不计入跨公司投资统计。</div></div>
+        <div class="detail-row"><div class="key">被代投机构 (推算)</div><div class="val" style="font-size:11px; color:#8b949e;">${covers.map(c => c).join('、')}</div></div>
         <div class="detail-row"><div class="key">备注</div><div class="val">${node.note || ''}</div></div>
-        <div class="detail-row"><div class="key">投了谁</div><div class="val">${covers.map(c => `<span style="color:#79c0ff; cursor:pointer; margin-right:6px;" onclick="focusNode('co:${c}')">${c}</span>`).join('')}</div></div>
       </div>
     `;
   }
@@ -850,14 +850,40 @@ window.focusNode = function(id) {
 // Stats
 const statsEl = document.getElementById('stats');
 const admitted = DATA.audit?.admitted || {};
+// v9 重构: 顶部 stats 只显示机构方, 不含个人
+// 计算 投资机构排行 (从 multi_company_investors + shareholders 跨公司统计)
+const investorAppearance = {};
+Object.values(DATA.shareholders_by_company).forEach(shs => {
+  if (!shs) return;
+  shs.forEach(sh => {
+    if (sh.type === 'legal' || sh.type === 'investor') {
+      if (!investorAppearance[sh.name]) investorAppearance[sh.name] = new Set();
+    }
+  });
+});
+// 重新计算跨公司
+Object.entries(DATA.shareholders_by_company).forEach(([co, shs]) => {
+  if (!shs) return;
+  shs.forEach(sh => {
+    if (sh.type === 'legal' || sh.type === 'investor') {
+      if (investorAppearance[sh.name]) investorAppearance[sh.name].add(co);
+    }
+  });
+});
+const investorRank = Object.entries(investorAppearance)
+  .map(([name, comps]) => ({ name, count: comps.size, comps: Array.from(comps) }))
+  .filter(x => x.count >= 2)
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 6);
+
 statsEl.innerHTML = `
   <div class="stat-pill">公司 <b>${companies.length}</b></div>
   <div class="stat-pill">关系 <b>${edges.length}</b></div>
-  <div class="stat-pill multi">跨公司投资方 <b>${Object.values(DATA.multi_company_investors).length}</b></div>
-  <div class="stat-pill qichacha">企查查关系 <b>${admitted.qichacha || 0}</b></div>
-  <div class="stat-pill web">一手公开证据 <b>${admitted.verified_public || 0}</b></div>
-  <div class="stat-pill" style="background:#f7c94822; border-color:#f7c94888; color:#f7c948;">🔥 关键人物 <b>${(DATA.bosses||[]).length}</b></div>
-  ${(DATA.boss_coverage_ranked || []).map((b,i) => `<div class="stat-pill" style="background:${i===0?'#ff5e5e22':'#21262d'};border-color:#ff5e5e55;cursor:pointer;" title="点击查看" onclick="focusNode('keyperson:${(DATA.bosses||[]).find(x=>x.name===b.name)?.id}')">${i+1}. ${b.name.split(' (')[0].split(' /')[0]} <b style="color:#f7c948;">${b.count}</b> 家</div>`).join('')}
+  <div class="stat-pill multi">跨公司机构方 <b>${Object.values(DATA.multi_company_investors).length}</b></div>
+  <div class="stat-pill qichacha">企查查 <b>${admitted.qichacha || 0}</b></div>
+  <div class="stat-pill web">公开证据 <b>${admitted.verified_public || 0}</b></div>
+  <div class="stat-pill" style="background:#21262d; border-color:#21262d; color:#8b949e; font-size:11px;">人物仅作 GP 关联</div>
+  ${investorRank.map((b,i) => `<div class="stat-pill" style="background:${i===0?'#f7c94822':'#21262d'};border-color:${i===0?'#f7c94888':'#21262d'};cursor:pointer;" title="点击查看" onclick="focusNode('sh:${b.name}')">${i+1}. ${b.name.length > 14 ? b.name.slice(0,12) + '…' : b.name} <b style="color:#f7c948;">${b.count}</b> 家</div>`).join('')}
 `;
 
 // 中心节点选择器
@@ -877,7 +903,7 @@ const suggestions = [
   ...companies.map(c => ({ id: 'co:' + c.short, name: c.short, cat: 'company', label: c.industry.slice(0, 12) })),
   ...verifiedInvestorSuggestions,
   // 关键人物节点
-  ...(DATA.bosses || []).map(b => ({ id: 'keyperson:' + b.id, name: '👑 ' + b.name, cat: 'person', label: b.title_short + ' · 投了 ' + b.covers.length + ' 家' })),
+  ...(DATA.bosses || []).map(b => ({ id: 'keyperson:' + b.id, name: '👤 ' + b.name, cat: 'person', label: b.title_short + ' (GP 关联)' })),
 ];
 suggestions.forEach(s => {
   const btn = document.createElement('button');
